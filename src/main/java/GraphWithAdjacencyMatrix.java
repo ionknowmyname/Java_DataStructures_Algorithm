@@ -1,18 +1,21 @@
 import com.faithfulolaleru.base.GraphNode;
+import com.faithfulolaleru.base.GraphNodeAdjacencyList;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class Graph {
+public class GraphWithAdjacencyMatrix {
 
     ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
     int[][] adjacencyMatrix;
 
 
-    public Graph(ArrayList<GraphNode> nodeList) {
+
+    public GraphWithAdjacencyMatrix(ArrayList<GraphNode> nodeList) {
         this.nodeList = nodeList;
         adjacencyMatrix = new int[nodeList.size()][nodeList.size()];   // make a 2D array with the number of nodes
     }
+
+
 
 
     public static void main(String[] args) {
@@ -23,7 +26,7 @@ public class Graph {
         nodeList.add(new GraphNode("D", 3));
         nodeList.add(new GraphNode("E", 4));
 
-        Graph g = new Graph(nodeList);
+        GraphWithAdjacencyMatrix g = new GraphWithAdjacencyMatrix(nodeList);
         g.addUndirectedEdge(0, 1);
         g.addUndirectedEdge(0, 2);
         g.addUndirectedEdge(0, 3);
@@ -31,6 +34,10 @@ public class Graph {
         g.addUndirectedEdge(2, 3);
         g.addUndirectedEdge(3, 4);
         System.out.print(g.toString());
+
+        ///////////////////////////////////////////////////////
+
+        ArrayList<GraphNodeAdjacencyList> nodeList2 = new ArrayList<GraphNodeAdjacencyList>();
     }
 
 
@@ -39,6 +46,7 @@ public class Graph {
         adjacencyMatrix[i][j] = 1;  // set 1 when there's a connection between nodes
         adjacencyMatrix[j][i] = 1;
     }
+
 
     @Override
     public String toString() {
@@ -59,4 +67,5 @@ public class Graph {
 
         return s.toString();
     }
+
 }
