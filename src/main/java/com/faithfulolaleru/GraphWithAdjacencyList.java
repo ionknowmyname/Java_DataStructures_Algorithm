@@ -4,6 +4,7 @@ import com.faithfulolaleru.base.GraphNode;
 import com.faithfulolaleru.base.GraphNodeAdjacencyList;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class GraphWithAdjacencyList {
 
@@ -33,6 +34,8 @@ public class GraphWithAdjacencyList {
         g.addUndirectedEdge(2, 3);
         g.addUndirectedEdge(3, 4);
         System.out.print(g.toString());
+
+        g.BFS();
 
     }
 
@@ -70,5 +73,38 @@ public class GraphWithAdjacencyList {
         }
 
         return s.toString();
+    }
+
+
+
+    ////////////////////////////////////
+    ////  FOR BREADTH-FIRST SEARCH  ////
+    ////////////////////////////////////
+
+
+    void bfsVisit(GraphNodeAdjacencyList node) {
+        LinkedList<GraphNodeAdjacencyList> queue = new LinkedList<>();
+        queue.add(node);
+
+        while(!queue.isEmpty()) {
+            GraphNodeAdjacencyList currentNode = queue.remove(0);
+            currentNode.isVisited = true;
+            System.out.print(currentNode.name + " ");
+
+            for (GraphNodeAdjacencyList neighbor : currentNode.neighbors) {
+                if (!neighbor.isVisited) {  // add not visited nodes to the list
+                    queue.add(neighbor);
+                    neighbor.isVisited = true;
+                }
+            }
+        }
+    }
+
+    public void BFS() {
+        for (GraphNodeAdjacencyList node : nodeList) {
+            if(!node.isVisited) {
+                bfsVisit(node);
+            }
+        }
     }
 }
