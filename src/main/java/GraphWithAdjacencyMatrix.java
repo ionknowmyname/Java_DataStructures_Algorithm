@@ -2,6 +2,7 @@ import com.faithfulolaleru.base.GraphNode;
 import com.faithfulolaleru.base.GraphNodeAdjacencyList;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class GraphWithAdjacencyMatrix {
 
@@ -35,9 +36,8 @@ public class GraphWithAdjacencyMatrix {
         g.addUndirectedEdge(3, 4);
         System.out.print(g.toString());
 
-        ///////////////////////////////////////////////////////
+        g.BFS();
 
-        ArrayList<GraphNodeAdjacencyList> nodeList2 = new ArrayList<GraphNodeAdjacencyList>();
     }
 
 
@@ -46,7 +46,6 @@ public class GraphWithAdjacencyMatrix {
         adjacencyMatrix[i][j] = 1;  // set 1 when there's a connection between nodes
         adjacencyMatrix[j][i] = 1;
     }
-
 
     @Override
     public String toString() {
@@ -67,5 +66,53 @@ public class GraphWithAdjacencyMatrix {
 
         return s.toString();
     }
+
+
+    ////////////////////////////////////
+    ////  FOR BREADTH-FIRST SEARCH  ////
+    ////////////////////////////////////
+
+
+    public ArrayList<GraphNode> getNeighbors(GraphNode node) {
+        ArrayList<GraphNode> neighbors = new ArrayList<GraphNode>();
+        int nodeIndex = node.index;
+
+        for (int i = 0; i < adjacencyMatrix.length; i++) {
+            if(adjacencyMatrix[nodeIndex][i] == 1) {   // that means they adjacent i.e there is an edge connecting the nodes
+                neighbors.add(nodeList.get(i));
+            }
+        }
+
+        return neighbors;
+    }
+
+    void bfsVisit(GraphNode node) {
+        LinkedList<GraphNode> queue = new LinkedList<>();
+        queue.add(node);
+
+        while(!queue.isEmpty()) {
+            GraphNode currentNode = queue.remove(0);
+            currentNode.isVisited = true;
+            System.out.print(currentNode.name + " ");
+
+            ArrayList<GraphNode> neighbors = getNeighbors(currentNode);
+            for (GraphNode neighbor : neighbors) {
+                if (!neighbor.isVisited) {  // add not visited nodes to the list
+                    queue.add(neighbor);
+                    neighbor.isVisited = true;
+                }
+            }
+        }
+    }
+
+    public void BFS() {
+        for (GraphNode node : nodeList) {
+            if(!node.isVisited) {
+                bfsVisit(node);
+            }
+        }
+    }
+
+
 
 }
