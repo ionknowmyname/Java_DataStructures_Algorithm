@@ -1,5 +1,6 @@
+package com.faithfulolaleru;
+
 import com.faithfulolaleru.base.GraphNode;
-import com.faithfulolaleru.base.GraphNodeAdjacencyList;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
