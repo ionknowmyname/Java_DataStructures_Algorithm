@@ -1,6 +1,6 @@
 package com.faithfulolaleru.Graphs;
 
-import com.faithfulolaleru.base.GraphNode;
+import com.faithfulolaleru.base.GraphNodeAdjacencyMatrix;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -8,12 +8,12 @@ import java.util.Stack;
 
 public class GraphWithAdjacencyMatrix {
 
-    ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
+    ArrayList<GraphNodeAdjacencyMatrix> nodeList = new ArrayList<GraphNodeAdjacencyMatrix>();
     int[][] adjacencyMatrix;
 
 
 
-    public GraphWithAdjacencyMatrix(ArrayList<GraphNode> nodeList) {
+    public GraphWithAdjacencyMatrix(ArrayList<GraphNodeAdjacencyMatrix> nodeList) {
         this.nodeList = nodeList;
         adjacencyMatrix = new int[nodeList.size()][nodeList.size()];   // make a 2D array with the number of nodes
     }
@@ -24,12 +24,12 @@ public class GraphWithAdjacencyMatrix {
     public static void main(String[] args) {
         /*
 
-        ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
-        nodeList.add(new GraphNode("A", 0));
-        nodeList.add(new GraphNode("B", 1));
-        nodeList.add(new GraphNode("C", 2));
-        nodeList.add(new GraphNode("D", 3));
-        nodeList.add(new GraphNode("E", 4));
+        ArrayList<GraphNodeAdjacencyMatrix> nodeList = new ArrayList<GraphNodeAdjacencyMatrix>();
+        nodeList.add(new GraphNodeAdjacencyMatrix("A", 0));
+        nodeList.add(new GraphNodeAdjacencyMatrix("B", 1));
+        nodeList.add(new GraphNodeAdjacencyMatrix("C", 2));
+        nodeList.add(new GraphNodeAdjacencyMatrix("D", 3));
+        nodeList.add(new GraphNodeAdjacencyMatrix("E", 4));
 
         GraphWithAdjacencyMatrix g = new GraphWithAdjacencyMatrix(nodeList);
         g.addUndirectedEdge(0, 1);
@@ -48,15 +48,15 @@ public class GraphWithAdjacencyMatrix {
 
         // Graph for Topological Sort
 
-        ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
-        nodeList.add(new GraphNode("A", 0));
-        nodeList.add(new GraphNode("B", 1));
-        nodeList.add(new GraphNode("C", 2));
-        nodeList.add(new GraphNode("D", 3));
-        nodeList.add(new GraphNode("E", 4));
-        nodeList.add(new GraphNode("F", 5));
-        nodeList.add(new GraphNode("G", 6));
-        nodeList.add(new GraphNode("H", 7));
+        ArrayList<GraphNodeAdjacencyMatrix> nodeList = new ArrayList<GraphNodeAdjacencyMatrix>();
+        nodeList.add(new GraphNodeAdjacencyMatrix("A", 0));
+        nodeList.add(new GraphNodeAdjacencyMatrix("B", 1));
+        nodeList.add(new GraphNodeAdjacencyMatrix("C", 2));
+        nodeList.add(new GraphNodeAdjacencyMatrix("D", 3));
+        nodeList.add(new GraphNodeAdjacencyMatrix("E", 4));
+        nodeList.add(new GraphNodeAdjacencyMatrix("F", 5));
+        nodeList.add(new GraphNodeAdjacencyMatrix("G", 6));
+        nodeList.add(new GraphNodeAdjacencyMatrix("H", 7));
 
         GraphWithAdjacencyMatrix g = new GraphWithAdjacencyMatrix(nodeList);
         g.addDirectedEdge(0, 2);
@@ -105,8 +105,8 @@ public class GraphWithAdjacencyMatrix {
     ////////////////////////////////////
 
 
-    public ArrayList<GraphNode> getNeighbors(GraphNode node) {
-        ArrayList<GraphNode> neighbors = new ArrayList<GraphNode>();
+    public ArrayList<GraphNodeAdjacencyMatrix> getNeighbors(GraphNodeAdjacencyMatrix node) {
+        ArrayList<GraphNodeAdjacencyMatrix> neighbors = new ArrayList<GraphNodeAdjacencyMatrix>();
         int nodeIndex = node.index;
 
         for (int i = 0; i < adjacencyMatrix.length; i++) {
@@ -118,17 +118,17 @@ public class GraphWithAdjacencyMatrix {
         return neighbors;
     }
 
-    void bfsVisit(GraphNode node) {
-        LinkedList<GraphNode> queue = new LinkedList<>();
+    void bfsVisit(GraphNodeAdjacencyMatrix node) {
+        LinkedList<GraphNodeAdjacencyMatrix> queue = new LinkedList<>();
         queue.add(node);
 
         while(!queue.isEmpty()) {
-            GraphNode currentNode = queue.remove(0);
+            GraphNodeAdjacencyMatrix currentNode = queue.remove(0);
             currentNode.isVisited = true;
             System.out.print(currentNode.name + " ");
 
-            ArrayList<GraphNode> neighbors = getNeighbors(currentNode);
-            for (GraphNode neighbor : neighbors) {
+            ArrayList<GraphNodeAdjacencyMatrix> neighbors = getNeighbors(currentNode);
+            for (GraphNodeAdjacencyMatrix neighbor : neighbors) {
                 if (!neighbor.isVisited) {  // add not visited nodes to the list
                     queue.add(neighbor);
                     neighbor.isVisited = true;
@@ -138,7 +138,7 @@ public class GraphWithAdjacencyMatrix {
     }
 
     public void BFS() {
-        for (GraphNode node : nodeList) {
+        for (GraphNodeAdjacencyMatrix node : nodeList) {
             if(!node.isVisited) {
                 bfsVisit(node);
             }
@@ -153,17 +153,17 @@ public class GraphWithAdjacencyMatrix {
 
 
 
-    void dfsVisit(GraphNode node) {
-        Stack<GraphNode> stack = new Stack<>();
+    void dfsVisit(GraphNodeAdjacencyMatrix node) {
+        Stack<GraphNodeAdjacencyMatrix> stack = new Stack<>();
         stack.push(node);
 
         while(!stack.isEmpty()) {
-            GraphNode currentNode = stack.pop();
+            GraphNodeAdjacencyMatrix currentNode = stack.pop();
             currentNode.isVisited = true;
             System.out.print(currentNode.name + " ");
 
-            ArrayList<GraphNode> neighbors = getNeighbors(currentNode);
-            for (GraphNode neighbor : neighbors) {
+            ArrayList<GraphNodeAdjacencyMatrix> neighbors = getNeighbors(currentNode);
+            for (GraphNodeAdjacencyMatrix neighbor : neighbors) {
                 if (!neighbor.isVisited) {  // add not visited nodes to the list
                     stack.push(neighbor);
                     neighbor.isVisited = true;
@@ -173,7 +173,7 @@ public class GraphWithAdjacencyMatrix {
     }
 
     public void DFS() {
-        for (GraphNode node : nodeList) {
+        for (GraphNodeAdjacencyMatrix node : nodeList) {
             if(!node.isVisited) {
                 dfsVisit(node);
             }
@@ -193,13 +193,13 @@ public class GraphWithAdjacencyMatrix {
         adjacencyMatrix[i][j] = 1;  // set 1 when there's a connection between nodes
     }
 
-    void topologicalVisit(GraphNode node, Stack<GraphNode> stack) {
-        ArrayList<GraphNode> neighbors = getNeighbors(node);
+    void topologicalVisit(GraphNodeAdjacencyMatrix node, Stack<GraphNodeAdjacencyMatrix> stack) {
+        ArrayList<GraphNodeAdjacencyMatrix> neighbors = getNeighbors(node);
 
         // check if neighbor node is visited, if yes, push to stack, if no, call topologicalVisit
         // recursively to going down the dependent nodes
 
-        for (GraphNode neighbor : neighbors) {
+        for (GraphNodeAdjacencyMatrix neighbor : neighbors) {
             if(!neighbor.isVisited) {
                 topologicalVisit(neighbor, stack);
             }
@@ -210,9 +210,9 @@ public class GraphWithAdjacencyMatrix {
     }
 
     void topologicalSort() {
-        Stack<GraphNode> stack = new Stack<>();
+        Stack<GraphNodeAdjacencyMatrix> stack = new Stack<>();
 
-        for (GraphNode node : nodeList) {
+        for (GraphNodeAdjacencyMatrix node : nodeList) {
             if(!node.isVisited) {
                 topologicalVisit(node, stack);
             }
