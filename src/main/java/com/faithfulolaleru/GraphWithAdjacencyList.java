@@ -20,6 +20,8 @@ public class GraphWithAdjacencyList {
 
 
     public static void main(String[] args) {
+        /*
+
         ArrayList<GraphNodeAdjacencyList> nodeList = new ArrayList<GraphNodeAdjacencyList>();
         nodeList.add(new GraphNodeAdjacencyList("A", 0));
         nodeList.add(new GraphNodeAdjacencyList("B", 1));
@@ -39,6 +41,33 @@ public class GraphWithAdjacencyList {
         // g.BFS();
         g.DFS();
 
+        */
+
+
+        // Graph for Topological Sort
+
+        ArrayList<GraphNodeAdjacencyList> nodeList = new ArrayList<GraphNodeAdjacencyList>();
+        nodeList.add(new GraphNodeAdjacencyList("A", 0));
+        nodeList.add(new GraphNodeAdjacencyList("B", 1));
+        nodeList.add(new GraphNodeAdjacencyList("C", 2));
+        nodeList.add(new GraphNodeAdjacencyList("D", 3));
+        nodeList.add(new GraphNodeAdjacencyList("E", 4));
+        nodeList.add(new GraphNodeAdjacencyList("F", 5));
+        nodeList.add(new GraphNodeAdjacencyList("G", 6));
+        nodeList.add(new GraphNodeAdjacencyList("H", 7));
+
+        GraphWithAdjacencyList g = new GraphWithAdjacencyList(nodeList);
+        g.addDirectedEdge(0, 2);
+        g.addDirectedEdge(2, 4);
+        g.addDirectedEdge(4, 7);
+        g.addDirectedEdge(4, 5);
+        g.addDirectedEdge(5, 6);
+        g.addDirectedEdge(1, 2);
+        g.addDirectedEdge(1, 3);
+        g.addDirectedEdge(3, 5);
+        System.out.print(g.toString());
+
+        g.topologicalSort();
     }
 
 
@@ -142,4 +171,48 @@ public class GraphWithAdjacencyList {
             }
         }
     }
+
+
+
+    ////////////////////////////////////
+    /////  FOR TOPOLOGICAL SORT  //////
+    ///////////////////////////////////
+
+
+
+    public void addDirectedEdge(int i, int j) {
+        GraphNodeAdjacencyList first = nodeList.get(i);
+        GraphNodeAdjacencyList second = nodeList.get(j);
+
+        first.neighbors.add(second);  // i.e going only from 1st to 2nd
+    }
+
+    void topologicalVisit(GraphNodeAdjacencyList node, Stack<GraphNodeAdjacencyList> stack) {
+        // check if neighbor node is visited, if yes, push to stack, if no, call topologicalVisit
+        // recursively to going down the dependent nodes
+
+        for (GraphNodeAdjacencyList neighbor : node.neighbors){
+            if (!neighbor.isVisited) {
+                topologicalVisit(neighbor, stack);
+            }
+        }
+
+        node.isVisited = true;
+        stack.push(node);
+    }
+
+    void topologicalSort() {
+        Stack<GraphNodeAdjacencyList> stack = new Stack<>();
+
+        for (GraphNodeAdjacencyList node : nodeList) {
+            if (!node.isVisited) {
+                topologicalVisit(node, stack);
+            }
+        }
+
+        while(!stack.isEmpty()) {
+            System.out.print(stack.pop().name + " ");
+        }
+    }
+
 }
