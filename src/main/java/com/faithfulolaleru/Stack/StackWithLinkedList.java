@@ -1,8 +1,6 @@
-package com.faithfulolaleru;
+package com.faithfulolaleru.Stack;
 
-import com.faithfulolaleru.base.ListNode;
-
-import java.util.ArrayList;
+import com.faithfulolaleru.LinkedList.LinkedList;
 
 public class StackWithLinkedList {
 

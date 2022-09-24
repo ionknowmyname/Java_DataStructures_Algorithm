@@ -1,4 +1,4 @@
-package com.faithfulolaleru;
+package com.faithfulolaleru.LinkedList;
 
 
 import com.faithfulolaleru.base.ListNode;

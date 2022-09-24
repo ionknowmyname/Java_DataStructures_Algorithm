@@ -1,4 +1,4 @@
-package com.faithfulolaleru;
+package com.faithfulolaleru.Queues;
 
 public class CircularQueueArray {
 

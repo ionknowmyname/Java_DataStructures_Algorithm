@@ -1,6 +1,6 @@
-package com.faithfulolaleru;
+package com.faithfulolaleru.Queues;
 
-import com.faithfulolaleru.base.ListNode;
+import com.faithfulolaleru.LinkedList.LinkedList;
 
 public class QueueLinkedList {
 
