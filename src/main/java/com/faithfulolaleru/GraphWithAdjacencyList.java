@@ -5,6 +5,7 @@ import com.faithfulolaleru.base.GraphNodeAdjacencyList;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Stack;
 
 public class GraphWithAdjacencyList {
 
@@ -35,7 +36,8 @@ public class GraphWithAdjacencyList {
         g.addUndirectedEdge(3, 4);
         System.out.print(g.toString());
 
-        g.BFS();
+        // g.BFS();
+        g.DFS();
 
     }
 
@@ -104,6 +106,39 @@ public class GraphWithAdjacencyList {
         for (GraphNodeAdjacencyList node : nodeList) {
             if(!node.isVisited) {
                 bfsVisit(node);
+            }
+        }
+    }
+
+
+
+    ////////////////////////////////////
+    ////  FOR DEPTH-FIRST SEARCH  /////
+    ///////////////////////////////////
+
+
+    void dfsVisit(GraphNodeAdjacencyList node) {
+        Stack<GraphNodeAdjacencyList> stack = new Stack<>();
+        stack.push(node);
+
+        while(!stack.isEmpty()) {
+            GraphNodeAdjacencyList currentNode = stack.pop();
+            currentNode.isVisited = true;
+            System.out.print(currentNode.name + " ");
+
+            for (GraphNodeAdjacencyList neighbor : currentNode.neighbors) {
+                if(!neighbor.isVisited) {  // if adjacent nodes/neighbors arent visited, then add to stack
+                    stack.push(neighbor);
+                    neighbor.isVisited = true;
+                }
+            }
+        }
+    }
+
+    public void DFS() {
+        for (GraphNodeAdjacencyList node : nodeList) {
+            if(!node.isVisited) {
+                dfsVisit(node);
             }
         }
     }
