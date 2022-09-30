@@ -91,8 +91,8 @@ public class GraphWithAdjacencyMatrix {
 
         ArrayList<GraphNodeSSSPP> nodeList = new ArrayList<GraphNodeSSSPP>();
         nodeList.add(new GraphNodeSSSPP("A", 0));
-        nodeList.add(new GraphNodeSSSPP("C", 2));
         nodeList.add(new GraphNodeSSSPP("B", 1));
+        nodeList.add(new GraphNodeSSSPP("C", 2));
         nodeList.add(new GraphNodeSSSPP("D", 3));
         nodeList.add(new GraphNodeSSSPP("E", 4));
         nodeList.add(new GraphNodeSSSPP("F", 5));
