@@ -1,17 +1,18 @@
 package com.faithfulolaleru.Graphs;
 
 import com.faithfulolaleru.base.GraphNodeDijkstra;
-import com.faithfulolaleru.base.GraphNodeSSSPP;
 
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 
-public class GraphForDijkstraSSSPP {
+public class GraphForBellmanFordSSSPP {
+
+    // Bellman Ford uses same Graph node as Dijkstra, just created a seperate class for it coz
+    // even while similar to Dijkstra, its its own algorithm
 
     ArrayList<GraphNodeDijkstra> nodeList = new ArrayList<>();
 
 
-    public GraphForDijkstraSSSPP(ArrayList<GraphNodeDijkstra> nodeList) {
+    public GraphForBellmanFordSSSPP(ArrayList<GraphNodeDijkstra> nodeList) {
         this.nodeList = nodeList;
     }
 
@@ -28,7 +29,7 @@ public class GraphForDijkstraSSSPP {
         nodeList.add(new GraphNodeDijkstra("F", 5));
         nodeList.add(new GraphNodeDijkstra("G", 6));
 
-        GraphForDijkstraSSSPP g = new GraphForDijkstraSSSPP(nodeList);
+        GraphForBellmanFordSSSPP g = new GraphForBellmanFordSSSPP(nodeList);
         g.addWeighedEdge(0, 1, 2);
         g.addWeighedEdge(0, 2, 5);
         g.addWeighedEdge(1, 2, 6);
@@ -38,34 +39,49 @@ public class GraphForDijkstraSSSPP {
         g.addWeighedEdge(3, 4, 4);
         g.addWeighedEdge(4, 6, 9);
         g.addWeighedEdge(5, 6, 7);
-        System.out.println("Printing Dijkstra from source: A");
-        g.dijkstra(nodeList.get(0));
+        System.out.println("Printing BellmanFord from source: A");
+        g.bellmanFord(nodeList.get(0));
     }
 
 
 
 
-    void dijkstra(GraphNodeDijkstra node) {
-        PriorityQueue<GraphNodeDijkstra> queue = new PriorityQueue<>();
-        node.distance = 0;   // set starting node distance to 0
-        queue.addAll(nodeList);    // add all elements of list to queue
 
-        while(!queue.isEmpty()) {
-            GraphNodeDijkstra currentNode = queue.remove();
-            for(GraphNodeDijkstra neighbor : currentNode.neighbors) {
-                // if neighbor is in queue, it means neighbor has not been visited; coz when we visit an element in queue, we remove it
-                if(queue.contains(neighbor)) {
-                    // if neighbor distance is greater than the new distance we calculating
-                    if(neighbor.distance > currentNode.distance + currentNode.weightMap.get(neighbor)) {
+    void bellmanFord(GraphNodeDijkstra sourceNode) {
+        sourceNode.distance = 0;
+
+        for (int i = 0; i < nodeList.size(); i++) {   // for V-1 times
+            for(GraphNodeDijkstra currentNode : nodeList) {
+                for(GraphNodeDijkstra neighbor : currentNode.neighbors) {
+                    if (neighbor.distance > currentNode.distance + currentNode.weightMap.get(neighbor)) {
                         neighbor.distance = (currentNode.distance + currentNode.weightMap.get(neighbor));
                         neighbor.parent = currentNode;
-                        // refresh queue by removing neighbor and adding again
-                        queue.remove(neighbor);
-                        queue.add(neighbor);
                     }
                 }
             }
         }
+
+        System.out.println("Checking for Negative Cycle..");
+        // on 1 more iteration, which is the Vth time, if dist. of neighbor is greater than the new dist. of neighbor,
+        // then we have -ve cycle
+
+        for (int i = 0; i < nodeList.size(); i++) {   // for V-1 times
+            for(GraphNodeDijkstra currentNode : nodeList) {
+                for(GraphNodeDijkstra neighbor : currentNode.neighbors) {
+                    if (neighbor.distance > currentNode.distance + currentNode.weightMap.get(neighbor)) {
+                        System.out.println("Negative cycle found: \n");
+                        System.out.println("Vertex name: " + neighbor.name);
+                        System.out.println("Old distance: " + neighbor.distance);
+
+                        int newDistance = (currentNode.distance + currentNode.weightMap.get(neighbor));
+                        System.out.println("New cost: " + newDistance);
+                        return;
+                    }
+                }
+            }
+        }
+
+        System.out.println("Negative Cycle not found");
 
         for(GraphNodeDijkstra nodeToCheck : nodeList) {
             System.out.print("Node " + nodeToCheck + ", distance: " + nodeToCheck.distance + ", Path: ");
@@ -87,4 +103,5 @@ public class GraphForDijkstraSSSPP {
         first.neighbors.add(second);
         first.weightMap.put(second, d);
     }
+
 }
