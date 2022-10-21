@@ -19,6 +19,7 @@ public class ConnectingToDB {
         String line;
         StringBuilder responseContent = new StringBuilder();
         try{
+            // https://jsonmock.hackerrank.com/api/articles
             URL url = new URL("https://jsonmock.hackerrank.com/api/moviesdata/search/?Title=Gi");
             conn = (HttpURLConnection) url.openConnection();
 
