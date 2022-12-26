@@ -49,7 +49,6 @@ public class LinkedList {
         ListNode current = head;
         while(current != null){
             System.out.print(current.data + " --> ");
-            // System.out.println(current.data + " --> ");  // this prints everything on a new line
             current = current.next;
         }
         System.out.println("null");

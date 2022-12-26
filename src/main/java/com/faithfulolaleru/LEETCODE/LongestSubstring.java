@@ -1,13 +1,12 @@
 package com.faithfulolaleru.LEETCODE;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LongestSubstring {
 
     /*
-        Longest substring with at most 2 distinct characters
+        1. Longest substring with at most 2 distinct characters
+        2. Longest substring with no repeating characters
         SLIDING WINDOW TECHNIQUE (Variable sized window)
     */
 
@@ -15,14 +14,19 @@ public class LongestSubstring {
 
     public static void main(String[] args) {
 
-        System.out.println(findLongestSubStringLength("abcabcbb"));
-        System.out.println(findLongestSubStringLength("bbbbb"));
-        System.out.println(findLongestSubStringLength("pwwkew"));
+        System.out.println(findLongestSubString2Distinct("abcabcbb"));
+        System.out.println(findLongestSubString2Distinct("bbbbb"));
+        System.out.println(findLongestSubString2Distinct("pwwkew"));
+
+        System.out.println("_______________________________");
+        System.out.println(findLongestSubStringNoRepeat("abcabcbb"));
+        System.out.println(findLongestSubStringNoRepeat("bbbbb"));
+        System.out.println(findLongestSubStringNoRepeat("pwwkew"));
     }
 
 
 
-    public static Integer findLongestSubStringLength(String word) {
+    public static Integer findLongestSubString2Distinct(String word) {
 
         if(word.length() < 2){
             return word.length();
@@ -56,6 +60,46 @@ public class LongestSubstring {
             }
 
             maxLength = Math.max(maxLength, (right - left) + 1);
+        }
+
+        return maxLength;
+    }
+
+    public static Integer findLongestSubStringNoRepeat(String word) {
+
+        if(word.length() < 2){
+            return word.length();
+        }
+
+        Set<Character> set = new HashSet<>();
+        int leftPointer = 0, rightPointer = 0, maxLength = 0;
+
+
+        /*  ORIGINAL SOLUTION, it works
+
+            while (rightPointer < word.length()) {
+                if (!set.contains(word.charAt(rightPointer))) {
+                    set.add(word.charAt(rightPointer++));
+                    maxLength = Math.max(maxLength, set.size());
+                } else {
+                    set.remove(word.charAt(leftPointer++));
+                }
+            }
+
+        */
+
+        // this as well works so far
+
+        while (rightPointer < word.length()) {
+            if (!set.contains(word.charAt(rightPointer))) {
+                set.add(word.charAt(rightPointer));
+                rightPointer++;
+                maxLength = Math.max(maxLength, set.size()); // or use rightPointer - leftPointer instead of set.size()
+            } else {
+                set.remove(word.charAt(leftPointer));
+                leftPointer++;
+                rightPointer++;
+            }
         }
 
         return maxLength;

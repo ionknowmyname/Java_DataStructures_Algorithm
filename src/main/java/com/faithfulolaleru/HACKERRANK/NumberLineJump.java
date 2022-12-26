@@ -1,4 +1,4 @@
-package com.faithfulolaleru.HackerRank;
+package com.faithfulolaleru.HACKERRANK;
 
 public class NumberLineJump {
 
