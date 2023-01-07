@@ -39,7 +39,7 @@ public class BinarySearchTree {
 
 
 
-    private BinarySearchNode insertNode(BinarySearchNode currentNode, int value){
+    public BinarySearchNode insertNode(BinarySearchNode currentNode, int value){
         if(currentNode == null){
             BinarySearchNode newNode = new BinarySearchNode(value);
             System.out.println("Successfully inserted new node with value -> " + value);
@@ -53,7 +53,7 @@ public class BinarySearchTree {
         }
     }
 
-    void insert(int value){
+    public void insert(int value){
         root = insertNode(root, value);  // this method not inserting well, the root is still always null, check it out later
     }
 

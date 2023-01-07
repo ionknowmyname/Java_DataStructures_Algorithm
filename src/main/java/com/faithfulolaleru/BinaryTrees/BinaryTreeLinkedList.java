@@ -115,7 +115,7 @@ public class BinaryTreeLinkedList {
     void levelOrderTraversal(){
         // level 1 -> level N, from left to right    // level 1 = root node, level N = last leaf level
 
-        Queue<BinaryNode> queue = new LinkedList<BinaryNode>();
+        Queue<BinaryNode> queue = new LinkedList<>();
         queue.add(root);
         while(!queue.isEmpty()){
             // remove root node, check if left and right have values, add left then right,

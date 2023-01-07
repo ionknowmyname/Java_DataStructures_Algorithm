@@ -1,5 +1,6 @@
 package com.faithfulolaleru.HACKERRANK;
 
+import com.faithfulolaleru.base.DoubleListNode;
 import com.faithfulolaleru.base.ListNode;
 
 import java.util.HashSet;
@@ -25,6 +26,7 @@ public class LinkedList {
         System.out.println(ll.addValueAtEnd(a, 6).data);
         System.out.println(ll.addValueAtIndex(a, 3, 2).data);
         System.out.println(ll.deleteNodeAtStart(a).data);
+        // System.out.println(ll.reverseDoublyLinkedList(a).data);
     }
 
 
@@ -170,6 +172,109 @@ public class LinkedList {
             }
             current1 = current1.next;
         }
-        return 0;
+
+        return -1;
+    }
+
+    public int findMergeNode2(ListNode head1, ListNode head2) {
+
+        ListNode current1 = head1;
+        ListNode current2 = head2;
+        int listLength1 = 0; int listLength2 = 0;
+
+        while(current1 != null) {  // gets the length of 1st linked list
+            current1 = current1.next;
+            listLength1++;
+        }
+        while(current2 != null) { // gets length of 2nd linked list
+            current2 = current2.next;
+            listLength2++;
+        }
+
+        while(listLength1 > listLength2) {
+            head1 = head1.next;
+            listLength1--;
+        }
+        while(listLength2 > listLength1) {
+            head2 = head2.next;
+            listLength2--;
+        }
+
+        while(head1 != null){
+            if (head1 == head2){
+                return head1.data;
+            }
+            head1 = head1.next;
+            head2 = head2.next;
+        }
+
+        return -1;
+    }
+
+    // reverse doubly linked list
+    public DoubleListNode reverseDoublyLinkedList(DoubleListNode head) {
+
+        if(head == null) return null;
+
+        DoubleListNode current = head;
+        DoubleListNode newHead = head;
+
+        while(current != null) {
+            // swap previous node and next node of current
+            DoubleListNode temp = current.prev;
+            current.prev = current.next;
+            current.next = temp;
+
+            newHead = current;
+            current = current.prev;   // coz we set the original current.next to current.prev, so use current.prev to move forward
+        }
+
+        return newHead;
+    }
+
+    // insert node into sorted doubly linked list
+    public DoubleListNode sortedInsert(DoubleListNode head, int data) {
+        DoubleListNode newNode = new DoubleListNode(data);
+
+        if(head == null) { // empty list, return new node created as head of new list
+            return newNode;
+        }
+
+        if(head.data > data) { // data to insert is less than head, so insert before head
+            newNode.next = head;
+            head.prev = newNode;
+            return newNode;
+        }
+
+        DoubleListNode current = head;
+
+        while(current.next != null) {
+            if(current.next.data > data) { // insert before current.next
+
+                // MY SOLUTION  -- WORKING
+                DoubleListNode temp = current.next;
+                current.next = newNode;
+                newNode.next = temp;  // this line + top 2 lines insert new node between current & current.next
+                newNode.prev = current;  // this line & next, take care of backward connection
+                temp.prev = newNode;
+
+
+                /*
+                    newNode.next = current.next;
+                    newNode.prev = current.next.prev;   // OR  = current
+                    current.next = newNode;
+                    newNode.next.prev = newNode;   // I don't get this line's usefulness
+                */
+
+                return head;
+            }
+            current = current.next;
+        }
+
+        // insert after current coz current.next is null
+        current.next = newNode;
+        newNode.prev = current;
+
+        return head;
     }
 }
