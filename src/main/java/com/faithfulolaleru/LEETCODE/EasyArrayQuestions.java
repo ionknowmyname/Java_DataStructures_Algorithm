@@ -1,6 +1,8 @@
 package com.faithfulolaleru.LEETCODE;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EasyArrayQuestions {
 
@@ -40,14 +42,27 @@ public class EasyArrayQuestions {
 
     // 560. Subarray Sum Equals K
     public int subarraySum(int[] nums, int k) {
-        int counter = 0;
-        int sum = 0;
+
+        int sum = 0, result = 0;
+        Map<Integer, Integer> preSum = new HashMap<>();
+        preSum.put(0, 1);  // start with zero sum seen 1 time
+
         for (int i = 0; i < nums.length; i++) {
             sum += nums[i];
-            if(sum == k) {
-                counter++;
+
+            if (preSum.containsKey(sum - k)) {
+                // if there's a previous sum in the map that's = current sum - k,
+                // it means k = current sum - that previous sum
+                // and it also means that previous sum is equal in value to k
+                // so we get how many occurences of that previous sum and add 1 to it to be our result
+
+
+                result += preSum.get(sum - k);
             }
+
+            preSum.put(sum, preSum.getOrDefault(sum, 0) + 1);  // update the num. of times we've seen the sum
         }
-        return counter;
+
+        return result;
     }
 }
