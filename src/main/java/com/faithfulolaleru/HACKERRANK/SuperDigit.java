@@ -58,11 +58,25 @@ public class SuperDigit {
         }
         sum *= k;
 
-        return findSumRecursive2(sum);
+        return (int) findSumRecursive2(sum);
     }
 
+    public static int superDigit3(String n, int k) {
 
-    static int findSumRecursive(String num) {  // adding up numbers from front
+        long superDigit = findSumRecursive(n);
+        long n1 = findSumRecursive2(superDigit);
+        long k1 = findSumRecursive2(k);
+
+        long result = n1 * k1;
+
+        while (result / 10 != 0) {
+            result = findSumRecursive2(result);
+        }
+
+        return (int) result;
+    }
+
+    static long findSumRecursive(String num) {  // adding up numbers from front
         if(num.length() == 1) {
             return Integer.parseInt(num);
         }
@@ -75,7 +89,7 @@ public class SuperDigit {
         return findSumRecursive(String.valueOf(sum));
     }
 
-    static int findSumRecursive2(long num) {  // adding up numbers from back using remainder method
+    static long findSumRecursive2(long num) {  // adding up numbers from back using remainder method
         if(num < 10) return (int) num;
 
         long sum = 0;
