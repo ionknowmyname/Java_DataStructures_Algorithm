@@ -2,6 +2,8 @@ package com.faithfulolaleru;
 
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class MainApplication {
 
@@ -43,6 +45,21 @@ public class MainApplication {
         }
 
         return fibonacci(n-1) + fibonacci(n-2);
+    }
+
+    // memoization
+    public static int fibonacciDynamicProgramming(int n, int[] memo) {
+        if(memo[n] == 0) {  // if we've found fibonacci of a number, return it without entering if-block
+            if(n < 2) {
+                memo[n] = n;
+            } else {
+                int left = fibonacciDynamicProgramming(n - 1, memo);
+                int right = fibonacciDynamicProgramming(n - 2, memo);
+                memo[n] = left + right;
+            }
+        }
+
+        return  memo[n];
     }
 
     public static int addNoOfDigitsTogether(int n){
