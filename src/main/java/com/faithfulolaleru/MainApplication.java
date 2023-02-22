@@ -2,8 +2,7 @@ package com.faithfulolaleru;
 
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+
 
 public class MainApplication {
 
@@ -19,10 +18,19 @@ public class MainApplication {
         // int gcd = greatestCommonDivisor(8,4);
         // int decimal  = decimalToBinary(8);
         // int[] TwoSum = main.twoSum(new int[]{2, 7, 11, 15}, 9);
-        String maxProduct = main.maxProductOfTwoInt(new int[]{2, 7, 11, 15});
+        // String maxProduct = main.maxProductOfTwoInt(new int[]{2, 7, 11, 15});
 
         // System.out.println(Arrays.toString(TwoSum));
-        System.out.println(maxProduct);
+        // System.out.println(maxProduct);
+
+
+//        System.out.println(fibonacci(3));
+//        System.out.println(fibonacci(5));
+//        System.out.println(fibonacci(50));
+
+        System.out.println(fibonacciDynamicProgramming(3, new int[4]));
+        System.out.println(fibonacciDynamicProgramming(5, new int[6]));
+        System.out.println(fibonacciDynamicProgramming(50, new int[51]));
 
     }
 
@@ -50,7 +58,7 @@ public class MainApplication {
     // memoization
     public static int fibonacciDynamicProgramming(int n, int[] memo) {
         if(memo[n] == 0) {  // if we've found fibonacci of a number, return it without entering if-block
-            if(n < 2) {
+            if(n == 0 || n == 1) {   // if (n < 2)
                 memo[n] = n;
             } else {
                 int left = fibonacciDynamicProgramming(n - 1, memo);
@@ -127,8 +135,7 @@ public class MainApplication {
             for (int j = i+1; j < nums.length; j++) {
                 if (nums[i] * nums[j] > maxProduct) {
                     maxProduct = nums[i] * nums[j];
-                    ans = nums[i] + "," + Integer.toString(nums[j]) + ", and maxProduct is = "
-                            + Integer.toString(maxProduct);
+                    ans = nums[i] + "," + nums[j] + ", and maxProduct is = " + maxProduct;
                 }
             }
         }
@@ -137,6 +144,8 @@ public class MainApplication {
 
     public boolean isUnique(int[] nums){
         // check that all the numbers in array are unique
+
+        Arrays.sort(nums);
 
         for (int i = 0; i < nums.length; i++) {
             for (int j = i+1; j < nums.length; j++) {
