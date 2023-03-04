@@ -65,6 +65,7 @@ public class LongestSubstring {
         return maxLength;
     }
 
+    // 3. Longest Substring Without Repeating Characters
     public static Integer findLongestSubStringNoRepeat(String word) {
 
         if(word.length() < 2){
@@ -75,7 +76,7 @@ public class LongestSubstring {
         int leftPointer = 0, rightPointer = 0, maxLength = 0;
 
 
-        /*  ORIGINAL SOLUTION, it works
+        /*  ORIGINAL SOLUTION, it works, passes all tests
 
             while (rightPointer < word.length()) {
                 if (!set.contains(word.charAt(rightPointer))) {
@@ -88,7 +89,7 @@ public class LongestSubstring {
 
         */
 
-        // this as well works so far
+        // this below fails some tests
 
         while (rightPointer < word.length()) {
             if (!set.contains(word.charAt(rightPointer))) {

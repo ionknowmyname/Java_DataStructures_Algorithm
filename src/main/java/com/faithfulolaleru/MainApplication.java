@@ -28,9 +28,13 @@ public class MainApplication {
 //        System.out.println(fibonacci(5));
 //        System.out.println(fibonacci(50));
 
-        System.out.println(fibonacciDynamicProgramming(3, new int[4]));
-        System.out.println(fibonacciDynamicProgramming(5, new int[6]));
-        System.out.println(fibonacciDynamicProgramming(50, new int[51]));
+//        System.out.println(fibonacciDynamicProgramming(3, new int[4]));
+//        System.out.println(fibonacciDynamicProgramming(5, new int[6]));
+//        System.out.println(fibonacciDynamicProgramming(50, new int[51]));
+
+        System.out.println(fibonacciDP(3));
+        System.out.println(fibonacciDP(5));
+        System.out.println(fibonacciDP(50));
 
     }
 
@@ -55,17 +59,30 @@ public class MainApplication {
         return fibonacci(n-1) + fibonacci(n-2);
     }
 
+
+    public static int fibonacciDP(int n) {
+        int memo[] = new int[n + 1];
+        Arrays.fill(memo,-1);
+
+        return fibonacciDynamicProgramming(n-1, memo) + fibonacciDynamicProgramming(n-2, memo);
+    }
+
     // memoization
     public static int fibonacciDynamicProgramming(int n, int[] memo) {
-        if(memo[n] == 0) {  // if we've found fibonacci of a number, return it without entering if-block
-            if(n == 0 || n == 1) {   // if (n < 2)
-                memo[n] = n;
-            } else {
-                int left = fibonacciDynamicProgramming(n - 1, memo);
-                int right = fibonacciDynamicProgramming(n - 2, memo);
-                memo[n] = left + right;
-            }
+        if(n < 0) return 0;
+        if(n == 0 || n == 1) {
+            memo[n] = 1;
+
+            return memo[n];
         }
+
+        if(memo[n] != -1) {  // if we've found fibonacci of a number, return it
+            return memo[n];
+        }
+
+        int left = fibonacciDynamicProgramming(n - 1, memo);
+        int right = fibonacciDynamicProgramming(n - 2, memo);
+        memo[n] = left + right;
 
         return  memo[n];
     }
