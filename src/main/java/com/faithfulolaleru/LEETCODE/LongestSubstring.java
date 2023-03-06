@@ -76,32 +76,34 @@ public class LongestSubstring {
         int leftPointer = 0, rightPointer = 0, maxLength = 0;
 
 
-        /*  ORIGINAL SOLUTION, it works, passes all tests
+        //  ORIGINAL SOLUTION, it works, passes all tests
+
+        while (rightPointer < word.length()) {
+            if (!set.contains(word.charAt(rightPointer))) {
+                set.add(word.charAt(rightPointer++));
+                maxLength = Math.max(maxLength, set.size());
+            } else {
+                set.remove(word.charAt(leftPointer++));
+            }
+        }
+
+        // this below fails some tests
+
+        /*
 
             while (rightPointer < word.length()) {
                 if (!set.contains(word.charAt(rightPointer))) {
-                    set.add(word.charAt(rightPointer++));
-                    maxLength = Math.max(maxLength, set.size());
+                    set.add(word.charAt(rightPointer));
+                    rightPointer++;
+                    maxLength = Math.max(maxLength, set.size()); // or use rightPointer - leftPointer instead of set.size()
                 } else {
-                    set.remove(word.charAt(leftPointer++));
+                    set.remove(word.charAt(leftPointer));
+                    leftPointer++;
+                    rightPointer++;
                 }
             }
 
         */
-
-        // this below fails some tests
-
-        while (rightPointer < word.length()) {
-            if (!set.contains(word.charAt(rightPointer))) {
-                set.add(word.charAt(rightPointer));
-                rightPointer++;
-                maxLength = Math.max(maxLength, set.size()); // or use rightPointer - leftPointer instead of set.size()
-            } else {
-                set.remove(word.charAt(leftPointer));
-                leftPointer++;
-                rightPointer++;
-            }
-        }
 
         return maxLength;
     }

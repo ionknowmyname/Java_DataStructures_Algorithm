@@ -2,6 +2,7 @@ package com.faithfulolaleru.LEETCODE;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 public class EasyStringQuestions {
 
@@ -70,5 +71,43 @@ public class EasyStringQuestions {
             }
         }
         return true;
+    }
+
+    // 20. Valid Parentheses
+    public static boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+
+        for(char ch: s.toCharArray())
+        {
+            switch (ch)
+            {
+                case '(':
+                case '{':
+                case '[':
+                    stack.push(ch);
+                    break;
+                case ')':
+                    if(stack.isEmpty() || stack.pop() != '(') {
+                        // if the stack is empty then it means string has no open bracket.
+                        return false;
+                    }
+                    break;
+                case '}':
+                    if(stack.isEmpty() || stack.pop() != '{') {
+                        return false;
+                    }
+                    break;
+                case ']':
+                    if(stack.isEmpty() || stack.pop() != '[') {
+                        return false;
+                    }
+                    break;
+            }
+        }
+
+        // return true only if the stack is empty.
+        // if stack is not empty that means we have unused brackets.
+
+        return stack.isEmpty();
     }
 }
