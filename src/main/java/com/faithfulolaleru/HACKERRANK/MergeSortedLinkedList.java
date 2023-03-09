@@ -31,15 +31,17 @@ public class MergeSortedLinkedList {
         Collections.sort(mergedList);
 
         // use 1st item of list to create a node to start of linked list
-        ListNode head = new ListNode(mergedList.get(0));
-        ListNode current = head;
+        ListNode head = null;
+        if(mergedList.size() > 0) {
+            head = new ListNode(mergedList.get(0));
+            ListNode current = head;
 
-        for (int i = 1; i < mergedList.size(); i++) {
-            current.next = new ListNode(mergedList.get(i));
-            current = current.next;
+            for (int i = 1; i < mergedList.size(); i++) {
+                current.next = new ListNode(mergedList.get(i));
+                current = current.next;
+            }
+            current.next = null;
         }
-        current.next = null;
-
 
         return head;
     }
