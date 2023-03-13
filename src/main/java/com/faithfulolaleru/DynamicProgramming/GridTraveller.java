@@ -1,4 +1,4 @@
-package com.faithfulolaleru;
+package com.faithfulolaleru.DynamicProgramming;
 
 import java.util.HashMap;
 import java.util.List;

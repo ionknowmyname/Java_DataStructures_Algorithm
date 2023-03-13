@@ -40,4 +40,47 @@ public class EasyBinaryTreeQuestions {
 
         return toReturn;
     }
+
+    // 103. Binary Tree Zigzag Level Order Traversal
+    public List<List<Integer>> zigzagLevelOrder(BinarySearchNode root) {
+        return null;
+    }
+
+
+    // 110. Balanced Binary Tree
+    public boolean isBalanced(BinarySearchNode root) {
+        if(root == null) return true;
+
+        int leftHeight = getHeight(root.left);
+        int rightHeight = getHeight(root.right);
+
+        if(Math.abs(leftHeight - rightHeight) > 1) return false;
+
+        return isBalanced(root.left) && isBalanced(root.right);
+    }
+
+    public boolean isBalanced2(BinarySearchNode root) {
+        if(root == null) return true;
+
+        return getHeight2(root) != -1;
+    }
+
+    public int getHeight(BinarySearchNode root) {
+        if(root == null) return 0;
+        int leftHeight = getHeight(root.left);
+        int rightHeight = getHeight(root.right);
+
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    public int getHeight2(BinarySearchNode root) {
+        if(root == null) return 0;
+        int leftHeight = getHeight(root.left);
+        int rightHeight = getHeight(root.right);
+        int diff = Math.abs(leftHeight - rightHeight);
+
+        if(diff > 1 || leftHeight == -1 || rightHeight == -1) return -1;
+
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
 }

@@ -65,4 +65,19 @@ public class EasyArrayQuestions {
 
         return result;
     }
+
+    // 53. Maximum Subarray
+    public int maxSubArray(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int maxSum = Integer.MIN_VALUE; int currentSum = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            currentSum = Math.max(nums[i], currentSum + nums[i]);
+            maxSum = Math.max(maxSum, currentSum);
+            currentSum = Math.max(currentSum, 0);  // if currentSum is -ve, start new subarray
+
+        }
+
+        return maxSum;
+    }g
 }
