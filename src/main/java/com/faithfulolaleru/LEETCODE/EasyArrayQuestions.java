@@ -79,5 +79,5 @@ public class EasyArrayQuestions {
         }
 
         return maxSum;
-    }g
+    }
 }
