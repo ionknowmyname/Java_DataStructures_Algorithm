@@ -43,7 +43,42 @@ public class EasyBinaryTreeQuestions {
 
     // 103. Binary Tree Zigzag Level Order Traversal
     public List<List<Integer>> zigzagLevelOrder(BinarySearchNode root) {
-        return null;
+
+        List<List<Integer>> toReturn = new ArrayList<>();
+        boolean positive = true;
+
+        if(root == null) return toReturn;
+
+        Queue<BinarySearchNode> queue = new LinkedList<>();
+        // queue.add(root);
+        queue.offer(root);   // better than add, only adds if not null .add would throw error if null
+
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            List<Integer> currentLevel = new ArrayList<>();
+
+            while(size-- > 0) {
+                // BinarySearchNode presentNode = queue.remove();
+                BinarySearchNode presentNode = queue.poll();
+                // again .remove throws error if queue is empty, poll returns null if queue is empty
+
+                if(positive) {
+                    currentLevel.add(presentNode.value);  // remove from queue & add its value to the list for that level
+                } else {
+                    currentLevel.add(0, presentNode.value);
+                }
+
+                if(presentNode.left != null) queue.offer(presentNode.left);
+                if(presentNode.right != null) queue.offer(presentNode.right);
+
+            }
+            // positive = true ? false : true;
+            positive = !positive;
+
+            toReturn.add(currentLevel);  // add each level list to list to return
+        }
+
+        return toReturn;
     }
 
 
