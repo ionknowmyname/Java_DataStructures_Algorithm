@@ -65,7 +65,8 @@ public class EasyBinaryTreeQuestions {
                 if(positive) {
                     currentLevel.add(presentNode.value);  // remove from queue & add its value to the list for that level
                 } else {
-                    currentLevel.add(0, presentNode.value);
+                    currentLevel.add(0, presentNode.value); // put at beginning each time,
+                    // the former 1st element should shift to the right by 1 each time
                 }
 
                 if(presentNode.left != null) queue.offer(presentNode.left);
