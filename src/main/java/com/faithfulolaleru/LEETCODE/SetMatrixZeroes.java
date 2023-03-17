@@ -74,4 +74,63 @@ public class SetMatrixZeroes {
             }
         }
     }
+
+    public void setZeroesBestSolution(int[][] matrix){
+
+        /*
+        *   use 1st row & 1st column of matrix instead of creating new row & column arrays like in
+        *   better solution; bt that would mean 1st row & 1st column would not be part of the main
+        *   matrix we would be traversing, we'd be traversing the sub-matrix without 1st row & 1st column;
+        *   so to cover up for that, we'd check 1st row & 1st column separately at beginning,
+        *   if any 0 in 1st row/column array, set the whole array value to 0 respectively
+        *
+        *
+        * */
+
+        int m = matrix.length, n = matrix[0].length;
+        boolean isRow0 = false, isCol0 = false;
+
+        for(int j = 0; j < n; j++) {
+            if(matrix[0][j] == 0) isRow0 = true;
+
+            // scan 1st row, if there's any 0, set isRow to true
+        }
+
+        for(int i = 0;i < m; i++) {
+            if(matrix[i][0]==0) isCol0=true;
+
+            // scan 1st column
+        }
+
+        // start traversing from smaller sub-matrix
+        for(int i = 1; i < m; i++) {
+            for(int j = 1; j < n; j++) {
+                if(matrix[i][j] == 0) {
+                    // instead of setting array values to 0 like in better solution,
+                    // set the matrix values in 1st row & 1st column to 0
+
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+            }
+        }
+
+        // now start setting the smaller sub-matrix values to 0 for anywhere in
+        // 1st column/1st row where we see 0
+        for(int i = 1; i < m; i++) {
+            for(int j = 1; j < n; j++){
+                if(matrix[0][j]==0 || matrix[i][0]==0) matrix[i][j]=0;
+            }
+        }
+
+        // 0 found in 1st row, set all 1st row values to 0
+        if(isRow0) {
+            for(int j = 0; j < n; j++) matrix[0][j] = 0;
+        }
+
+        // 0 found in 1st column, set all 1st column values to 0
+        if(isCol0) {
+            for(int i = 0; i < m; i++) matrix[i][0] = 0;
+        }
+    }
 }
