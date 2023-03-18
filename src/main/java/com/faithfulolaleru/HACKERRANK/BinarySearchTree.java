@@ -75,6 +75,8 @@ public class BinarySearchTree {
         }
     }
 
+
+    // fails some tests on leetcode, works fine on hackerrank?
     public BinarySearchNode findLowestCommonAncestor2(BinarySearchNode root, BinarySearchNode node1, BinarySearchNode node2) {
 
         if (root == null) {
@@ -90,6 +92,20 @@ public class BinarySearchTree {
         }
         BinarySearchNode left = findLowestCommonAncestor2(root.left, node1, node2);
         return left == null ? findLowestCommonAncestor2(root.right, node1, node2) : left;
+    }
+
+    // leetcode solution
+    public BinarySearchNode findLowestCommonAncestor3(BinarySearchNode root, BinarySearchNode p, BinarySearchNode q) {
+
+        if(root == null || root.value == p.value || root.value == q.value) return root;
+
+        BinarySearchNode left = findLowestCommonAncestor3(root.left,p,q);
+        BinarySearchNode right = findLowestCommonAncestor3(root.right,p,q);
+
+        if(left == null) return right;
+        if(right == null) return left;
+
+        return root;
     }
 
 }
