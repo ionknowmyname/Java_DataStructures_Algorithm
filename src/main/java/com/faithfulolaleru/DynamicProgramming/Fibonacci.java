@@ -80,7 +80,7 @@ public class Fibonacci {
         tb.add(0);
         tb.add(1);
 
-        for (int i = 2; i < n - 1; i++) {
+        for (int i = 2; i <= n - 1; i++) {
             int n1 = tb.get(n - 1);
             int n2 = tb.get(n - 2);
 
