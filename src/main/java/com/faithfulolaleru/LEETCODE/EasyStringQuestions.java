@@ -38,11 +38,11 @@ public class EasyStringQuestions {
     // 242. Valid Anagram
     public boolean isAnagram(String s, String t) {
         Map<Character, Integer> map = new HashMap<>();
-        for(int i = 0;i < s.length(); i++) {   // populate map with characters from s
+        for(int i = 0; i < s.length(); i++) {   // populate map with characters from s
             char ch = s.charAt(i);
             map.put(ch, map.getOrDefault(ch,0) + 1);
         }
-        for(int i=0;i<t.length();i++) { // use characters from map
+        for(int i = 0; i < t.length(); i++) { // use characters from map
             char ch = t.charAt(i);
             if(map.get(ch) != null) {   // character exists in map
                 if(map.get(ch) == 1) {    // char in map only once, after using, remove from map
