@@ -5,8 +5,13 @@ import java.util.*;
 public class GroupAnagrams {
 
 
+    public static void main(String[] args) {
+        System.out.println(groupAnagrams2(new String[]{"eat","tea","tan","ate","nat","bat"}));
+    }
+
+
     // 49. Group Anagrams
-    public List<List<String>> groupAnagrams(String[] strs) {
+    public static List<List<String>> groupAnagrams(String[] strs) {
 
         /*
         *   EXPLANATION: after sorting the strings using char array, if string not yet in hashmap, meaning
@@ -37,17 +42,17 @@ public class GroupAnagrams {
         return new ArrayList<>(hashMap.values());
     }
 
-    public List<List<String>> groupAnagrams2(String[] strs) {
+    public static List<List<String>> groupAnagrams2(String[] strs) {
 
         if (strs == null) return null;
         if (strs.length == 0) return new ArrayList<>();
 
         Map<String, List<String>> hashMap = new HashMap<>();
 
-        for(String s : strs ) {
+        for(String s : strs) {
 
             char[] valArr = s.toCharArray();
-            Arrays.sort( valArr );
+            Arrays.sort(valArr);
             String key = new String(valArr);
 
             List<String> ll = hashMap.getOrDefault(key, new ArrayList<>());

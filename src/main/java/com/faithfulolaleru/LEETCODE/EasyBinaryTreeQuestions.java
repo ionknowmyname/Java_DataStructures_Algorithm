@@ -119,4 +119,15 @@ public class EasyBinaryTreeQuestions {
 
         return Math.max(leftHeight, rightHeight) + 1;
     }
+
+    // 104. Maximum Depth of Binary Tree
+    public int maxDepth(BinarySearchNode root) {
+        if(root == null) return 0;
+
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
+
+        return Math.max(left, right) + 1;  // root is level 1 not level 0
+
+    }
 }
