@@ -7,9 +7,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class ConnectingToDB {
+public class CallAPI {
 
-    private static final java.util.logging.Logger log = java.util.logging.Logger.getLogger(ConnectingToDB.class.getName());
+    private static final java.util.logging.Logger log = java.util.logging.Logger.getLogger(CallAPI.class.getName());
 
     private static HttpURLConnection conn;
 
@@ -27,6 +27,7 @@ public class ConnectingToDB {
             conn.setRequestMethod("GET");
             conn.setConnectTimeout(5000);// 5000 milliseconds = 5 seconds
             conn.setReadTimeout(5000);
+            conn.addRequestProperty("Content-Type", "application/json");
 
             // Test if the response from the server is successful
             int status = conn.getResponseCode();
