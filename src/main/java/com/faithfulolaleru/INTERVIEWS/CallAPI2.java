@@ -23,7 +23,7 @@ public class CallAPI2 {
 
     public static int getTotalGoals(String team, int year) throws IOException {
         final String endpoint = "https://jsonmock.hackerrank.com/api/football_matches";
-        // String endpoint = "https://jsonmock.hackerrank.com/api/tvseries";
+        // String endpoint = "https://jsonmock.hackerrank.com/api/tvseries"; ?page=2
 
         int totalGoalsAtHome = getPageTotalGoals(String.format(endpoint + "?team1=%s&year=%d",
                 URLEncoder.encode(team, "UTF-8"), year), 0, "team1", 1);
