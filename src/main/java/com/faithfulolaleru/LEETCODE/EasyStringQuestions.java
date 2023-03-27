@@ -1,5 +1,6 @@
 package com.faithfulolaleru.LEETCODE;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -7,8 +8,9 @@ import java.util.Stack;
 public class EasyStringQuestions {
 
     public static void main(String[] args) {
-        System.out.println(isPalindromeNumber(121));
-        System.out.println(isPalindromeNumber(-121));
+//        System.out.println(isPalindromeNumber(121));
+//        System.out.println(isPalindromeNumber(-121));
+        System.out.println(isAnagram2("anagram", "nagaram"));
     }
 
 
@@ -55,6 +57,20 @@ public class EasyStringQuestions {
             }
         }
         return map.isEmpty();
+    }
+
+    public static boolean isAnagram2(String s, String t) {
+        char[] sArr = s.toCharArray();
+        Arrays.sort(sArr);
+        String sNew = new String(sArr);
+
+        char[] tArr = t.toCharArray();
+        Arrays.sort(tArr);
+        String tNew = new String(tArr);
+
+        if(tNew.equalsIgnoreCase(sNew)) return true;
+
+        return false;
     }
 
     // 125. Valid Palindrome
