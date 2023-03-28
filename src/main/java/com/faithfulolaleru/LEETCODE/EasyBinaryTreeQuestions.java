@@ -130,4 +130,22 @@ public class EasyBinaryTreeQuestions {
         return Math.max(left, right) + 1;  // root is level 1 not level 0
 
     }
+
+    // 144. Binary Tree Preorder Traversal
+    public List<Integer> preorderTraversal(BinarySearchNode root) {
+        List<Integer> toReturn = new ArrayList<>();
+
+        preOrder(root, toReturn);
+
+        return toReturn;
+    }
+
+    public void preOrder(BinarySearchNode root, List<Integer> list) {
+        if(root == null) return;
+
+        list.add(root.value);
+
+        preOrder(root.left, list);
+        preOrder(root.right, list);
+    }
 }

@@ -33,9 +33,35 @@ public class EasyStringQuestions {
     }
 
     // 409. Longest Palindrome
-//    public static int longestPalindrome(String s) {
-//
-//    }
+    public static int longestPalindrome(String s) {
+        int oddCount = 0;
+        char[] sChar = s.toCharArray();
+
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < sChar.length; i++) {
+//            if(map.containsKey(sChar[i])) map.put(sChar[i], map.get(sChar[i]) + 1);
+//            else map.put(sChar[i], 1);
+
+            map.put(sChar[i], map.getOrDefault(sChar[i], 0) + 1);
+
+            if(map.get(sChar[i]) % 2 == 1) {  // appears odd times
+                oddCount++;
+            } else {   // appears even times, reduce the odd count
+                oddCount--;
+            }
+        }
+
+        if (oddCount > 1) {
+            return s.length() - oddCount + 1;
+            // + 1 coz you can use one of the characters that has no pair to be in the middle of your palindrome
+            // so one of the Char that appear odd times would count
+        }
+
+        // if no odd count, the whole string a palindrome
+        return s.length();
+
+    }
 
     // 242. Valid Anagram
     public boolean isAnagram(String s, String t) {
