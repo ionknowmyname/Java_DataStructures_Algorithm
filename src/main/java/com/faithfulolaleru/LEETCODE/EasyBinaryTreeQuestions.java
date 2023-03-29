@@ -148,4 +148,29 @@ public class EasyBinaryTreeQuestions {
         preOrder(root.left, list);
         preOrder(root.right, list);
     }
+
+    // 543. Diameter of Binary Tree
+    public int diameterOfBinaryTree(BinarySearchNode root) {
+
+        if(root == null) return 0;
+
+        int diameter[] = new int[1];
+
+        height(root, diameter);
+
+        return diameter[0];
+    }
+
+    public int height(BinarySearchNode root, int diameter[]) {
+        if(root == null) return 0;
+
+        int left = height(root.left, diameter);
+        int right = height(root.right, diameter);
+        diameter[0] = Math.max(diameter[0], left + right);
+        // take the result of each recursive call & set whichever is greater, the current diameter[0] or left + right
+        // as new diameter[0]
+
+        return 1 + Math.max(left, right);  // this just returns height of binary tree, we don't need it
+    }
 }
+
