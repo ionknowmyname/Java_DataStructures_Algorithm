@@ -73,7 +73,7 @@ public class Fibonacci {
     }
 
     // best DP solution using tabulation, no recursion
-    public static int fibonacciDP3(int n, Map<Integer, Integer> memo) {
+    public static int fibonacciDP3(int n) {
         List<Integer> tb = new ArrayList<>();
 
         // add 1st & 2nd values of fibonacci sequence
