@@ -1,5 +1,8 @@
 package com.faithfulolaleru.LEETCODE;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LongestRepeatingCharacterReplacement {
 
 
@@ -22,7 +25,7 @@ public class LongestRepeatingCharacterReplacement {
             maxCount = Math.max(maxCount, currentCharCount);
             // updating the max count, which would be the most number of times a letter appears
 
-            while(end - start - maxCount + 1 > k) {
+            while((end - start + 1) - maxCount > k) {
                 // end - start is regular window, maxCount is count of letters that are same
                 // so (end - start - maxCount) accounts for letters that are different from the letter
                 // that owns maxCount & that needs tp be changed to find max repeating substring within our window
@@ -38,6 +41,38 @@ public class LongestRepeatingCharacterReplacement {
             }
 
             maxLength = Math.max(maxLength, end - start + 1);
+        }
+
+        return maxLength;
+    }
+
+
+    // using hashmap to track frequency of integer array
+    public int characterReplacement2(String s, int k) {
+
+        char[] arr = s.toCharArray();
+
+        int left = 0, right = 0, N = arr.length;
+        int maxLength = 0, mostFreqCount = 0;
+
+        Map<Character, Integer> map = new HashMap<>();
+
+        while(right < N) {
+            // add each letter to hashmap & increase its frequency
+            // then update most frequent count
+
+            map.put(arr[right], map.getOrDefault(arr[right], 0) + 1);
+            mostFreqCount = Math.max(mostFreqCount, map.get(arr[right]));
+
+            // shrink the window by moving left pointer forward if we need to do more than k replacements
+            if((right - left + 1) - mostFreqCount > k) {
+                map.put(arr[left], map.get(arr[left]) - 1);
+                left++;
+            }
+
+            // Calculate MaxLength then move right forward
+            maxLength = Math.max(maxLength, right - left + 1);
+            right++;
         }
 
         return maxLength;
