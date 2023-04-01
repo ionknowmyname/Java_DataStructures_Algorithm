@@ -50,7 +50,7 @@ public class SuperDigit {
         long sum = 0;
         long num = Long.parseLong(n);
 
-        for(int i = 0; i< n.length(); i++){
+        for(int i = 0; i < n.length(); i++){
             // sum += Integer.valueOf(n.charAt(i) - 48);
 
             sum += num % 10;
