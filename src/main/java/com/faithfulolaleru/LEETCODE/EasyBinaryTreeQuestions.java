@@ -204,16 +204,50 @@ public class EasyBinaryTreeQuestions {
     }
 
     public boolean isIdentical2(BinarySearchNode root, BinarySearchNode subRoot) {
-        if(root==null && subRoot==null) return true;
-        if(root==null || subRoot==null) return false;
+        if(root == null && subRoot==null) return true;
+        if(root == null || subRoot == null) return false;
 
         // only starts to do the recursive after they match, so if at any point they don't match,
         // it just throws false straight
         if(root.value == subRoot.value) {
-            return isIdentical2(root.left, subRoot.left) && isIdentical2(root.right,subRoot.right);
+            return isIdentical2(root.left, subRoot.left) && isIdentical2(root.right, subRoot.right);
         }
 
         return false;
+    }
+
+    // 100. Same Tree
+    public boolean isSameTree(BinarySearchNode p, BinarySearchNode q) {
+        if(p == null && q == null) {
+            return true;
+        } else if(p == null || q == null || p.value != q.value) {
+            return false;
+        }
+
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    }
+
+    public boolean isSameTree2(BinarySearchNode p, BinarySearchNode q) {
+        List<Integer> list = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
+        inOrder(p, list);
+        inOrder(q, list2);
+
+        if(list.equals(list2)) return true;
+        else return false;
+    }
+
+    public void inOrder(BinarySearchNode p, List<Integer> list) {
+        if(p == null) return;
+
+        inOrder(p.left, list);
+
+        list.add(p.value);
+
+        inOrder(p.right, list);
+
+        if(p.left == null) list.add(null);
+        if(p.right == null) list.add(null);
     }
 }
 
