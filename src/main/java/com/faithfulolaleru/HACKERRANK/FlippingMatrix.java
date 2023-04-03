@@ -31,6 +31,7 @@ public class FlippingMatrix {
 
         System.out.println(flippingMatrix(toTest));
         System.out.println(flippingMatrix2(toTest));
+        System.out.println(flippingMatrix3(toTest));
 
         // ans should be 414
     }
@@ -105,6 +106,38 @@ public class FlippingMatrix {
 
                 // instead of sorting, just pick max
                 localMax = localList.stream().max((a, b) -> a - b).get();
+
+                finalTotal += localMax;
+            }
+        }
+
+        return finalTotal;
+    }
+
+    // no need for extra array
+    // also working
+    public static int flippingMatrix3(List<List<Integer>> matrix) {
+
+        int finalTotal = 0; int localMax = 0; // Integer.MIN_VALUE
+
+        int n = matrix.size() / 2;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+
+                // get all the 4 numbers that can be rotated amongst themselves to get the max for that square/index
+                int a1 = matrix.get(i).get(j);
+                int a2 = matrix.get((2 * n) - i - 1).get(j);
+                int a3 = matrix.get(i).get((2 * n) - j - 1);
+                int a4 = matrix.get((2 * n) - i - 1).get((2 * n) - j - 1);
+
+                // find max 1 by 1
+//                localMax = Math.max(localMax, a1);
+//                localMax = Math.max(localMax, a2);
+//                localMax = Math.max(localMax, a3);
+//                localMax = Math.max(localMax, a4);
+
+                localMax = Math.max(a1, Math.max(a2, Math.max(a3, a4)));
 
                 finalTotal += localMax;
             }

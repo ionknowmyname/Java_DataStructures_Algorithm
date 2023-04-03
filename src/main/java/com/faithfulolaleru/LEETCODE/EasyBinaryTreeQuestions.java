@@ -172,5 +172,48 @@ public class EasyBinaryTreeQuestions {
 
         return 1 + Math.max(left, right);  // this just returns height of binary tree, we don't need it
     }
+
+    // 572. Subtree of Another Tree
+    public boolean isSubtree(BinarySearchNode root, BinarySearchNode subRoot) {
+        if(root == null) return false;
+
+        // only start to take into consideration if the two values match
+        if(root.value == subRoot.value) {
+
+            // check that they are identical i.e all their sub trees match, before returning that its a true subtree
+            if(isIdentical(root, subRoot)) return true;
+        }
+
+        // if either the left branch or the right branch matches with the subroot, then its a sub tree
+        return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+    }
+
+    public boolean isIdentical(BinarySearchNode node, BinarySearchNode subRoot) {
+
+        if(node == null && subRoot == null) {
+            return true;
+        } else if(node == null || subRoot == null || node.value != subRoot.value) {
+            return false;
+        }
+
+        // if subsequent right or left nodes don't match, then not identical
+        if(!isIdentical(node.left, subRoot.left)) return false;
+        if(!isIdentical(node.right,subRoot.right)) return false;
+
+        return true;
+    }
+
+    public boolean isIdentical2(BinarySearchNode root, BinarySearchNode subRoot) {
+        if(root==null && subRoot==null) return true;
+        if(root==null || subRoot==null) return false;
+
+        // only starts to do the recursive after they match, so if at any point they don't match,
+        // it just throws false straight
+        if(root.value == subRoot.value) {
+            return isIdentical2(root.left, subRoot.left) && isIdentical2(root.right,subRoot.right);
+        }
+
+        return false;
+    }
 }
 
