@@ -10,7 +10,7 @@ import java.util.Map;
 public class WeightedNode implements Comparable<WeightedNode> {
 
     public String name;
-    public List<WeightedNode> neighbors = new ArrayList<WeightedNode>();
+    public List<WeightedNode> neighbors = new ArrayList<>();
     public Map<WeightedNode, Integer> weightMap = new HashMap<>();
     public boolean isVisited = false;
     public WeightedNode parent;
@@ -23,6 +23,11 @@ public class WeightedNode implements Comparable<WeightedNode> {
         this.name = name;
         distance = Integer.MAX_VALUE;
         this.index = index;
+    }
+
+    public WeightedNode(String name) {
+        this.name = name;
+        distance = Integer.MAX_VALUE;
     }
 
     @Override

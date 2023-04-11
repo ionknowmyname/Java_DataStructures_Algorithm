@@ -9,6 +9,27 @@ public class DisjointSet {
 
     private List<WeightedNode> nodeList = new ArrayList<>();
 
+    public static void main(String[] args) {
+        List<WeightedNode> nodeList = new ArrayList<>();
+
+        nodeList.add(new WeightedNode("A"));
+        nodeList.add(new WeightedNode("B"));
+        nodeList.add(new WeightedNode("C"));
+        nodeList.add(new WeightedNode("D"));
+
+        DisjointSet.makeSet(nodeList);
+        WeightedNode firstNode = nodeList.get(0);
+        WeightedNode secondNode = nodeList.get(1);
+
+        DisjointSet output = DisjointSet.findSet(secondNode);
+        output.printAllNodesofThisSet();
+
+        DisjointSet.union(firstNode, secondNode);
+        output = DisjointSet.findSet(secondNode);
+        output.printAllNodesofThisSet();
+
+    }
+
 
     public static void makeSet(List<WeightedNode> nodeList) {
         // create disjoint set for each weighted node, attach the weighted node to the set,
