@@ -8,7 +8,7 @@ public class GraphNodeSSSPP extends GraphNode {
 
 
     // this neighbors array is only for adjacency list, for adjacency matrix, we use neighbors in its class
-    public ArrayList<GraphNodeSSSPP> neighbors = new ArrayList<GraphNodeSSSPP>();
+    public ArrayList<GraphNodeSSSPP> neighbors = new ArrayList<>();
 
 
 

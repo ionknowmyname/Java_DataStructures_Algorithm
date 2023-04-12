@@ -1,23 +1,19 @@
-package com.faithfulolaleru.INTERVIEWS;
+package com.faithfulolaleru.Miscellaneous;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class CallAPI3 {
+public class CallAPI2 {
 
     private static final java.util.logging.Logger log = java.util.logging.Logger.getLogger(CallAPI.class.getName());
 
     /*
-    *   HACKERRANK: REST API - Number of Drawn Matches
+    *   HACKERRANK: REST API - Total Goals by a Team
     *
     *   https://www.youtube.com/watch?v=0br3nIJUS14
     *
@@ -25,20 +21,21 @@ public class CallAPI3 {
 
 
 
-    public static int getNumDraws(int year) throws IOException {
-        final String endpoint = "https://jsonmock.hackerrank.com/api/football_matches?year=" + year;
-        final int MaxScore = 10;
-        int totalNumDraws = 0;
+    public static int getTotalGoals(String team, int year) throws IOException {
+        final String endpoint = "https://jsonmock.hackerrank.com/api/football_matches";
+        // String endpoint = "https://jsonmock.hackerrank.com/api/tvseries"; ?page=2
 
-        for (int score = 0; score <= MaxScore; score++) {
-            totalNumDraws = getTotalNumDraws(String.format(endpoint + "&team1goals=%d&team2goals=%d", score, score));
-        }
+        int totalGoalsAtHome = getPageTotalGoals(String.format(endpoint + "?team1=%s&year=%d",
+                URLEncoder.encode(team, "UTF-8"), year), 0, "team1", 1);
 
-        return totalNumDraws;
+        int totalGoalsAtVisiting = getPageTotalGoals(String.format(endpoint + "?team2=%s&year=%d",
+                URLEncoder.encode(team, "UTF-8"), year), 0, "team2", 1);
+
+        return totalGoalsAtHome + totalGoalsAtVisiting;
     }
 
-    private static int getTotalNumDraws(String request) throws IOException {
-        URL url = new URL(request);
+    private static int getPageTotalGoals(String request, int totalGoals, String team, int page) throws IOException {
+        URL url = new URL(request + "&page=" + page);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
         conn.setRequestMethod("GET");
@@ -64,7 +61,8 @@ public class CallAPI3 {
         ScriptEngine engine = manager.getEngineByName("javascript");
 
         String script = "var obj = JSON.parse('" + responseContent.toString() + "'); ";
-        script += "var total = obj.total; ";
+        script += "var total_pages = obj.total_pages; ";
+        script += "var total_goals = obj.data.reduce(function(accumulator, current) { return accumulator + parseInt(current." + team + "goals); }, 0); ";
 
         try {
             engine.eval(script);
@@ -72,11 +70,15 @@ public class CallAPI3 {
             ex.printStackTrace();
         }
 
-        if(engine.get("total") == null) {
+
+        if(engine.get("total_pages") == null) {
             throw new RuntimeException("Cannot retrieve data from the server");
         }
 
-        return (int) engine.get("total");
+        int totalPages = (int) engine.get("total_pages");
+        totalGoals += (int) Double.parseDouble(engine.get("total_goals").toString());
+
+        return (page < totalPages) ? getPageTotalGoals(request, totalGoals, team, page + 1) : totalGoals;
     }
 
 }

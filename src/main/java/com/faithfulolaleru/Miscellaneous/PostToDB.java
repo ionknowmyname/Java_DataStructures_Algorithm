@@ -1,4 +1,4 @@
-package com.faithfulolaleru.INTERVIEWS;
+package com.faithfulolaleru.Miscellaneous;
 
 import java.io.BufferedReader;
 import java.io.IOException;
