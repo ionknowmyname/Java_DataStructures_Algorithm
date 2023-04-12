@@ -11,6 +11,8 @@ import java.util.List;
 
 public class KruskalAlgorithm {
 
+    // Kruskal's Algorithm for Minimum Spanning Tree
+
     public static class UndirectedEdge {
         public WeightedNode first;
         public WeightedNode second;
@@ -101,7 +103,8 @@ public class KruskalAlgorithm {
 
         int cost = 0;
         // if the 2 nodes that make an edge are not in the same set, add them to the same set
-        // & increase cost; adding them to the same set
+        // & increase cost; adding them to the same set adds them to the minimum spanning tree;
+        // at the end, all members of the set would form the MST
         for(UndirectedEdge edge : edgeList) {
             WeightedNode first = edge.first;
             WeightedNode second = edge.second;
