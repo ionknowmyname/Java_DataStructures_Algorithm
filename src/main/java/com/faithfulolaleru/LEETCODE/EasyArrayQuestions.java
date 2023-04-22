@@ -1,13 +1,12 @@
 package com.faithfulolaleru.LEETCODE;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class EasyArrayQuestions {
 
     public static void main(String[] args) {
 
+        System.out.println(removeDuplicates(new int[] { 1, 1, 2 }));
     }
 
 
@@ -79,5 +78,25 @@ public class EasyArrayQuestions {
         }
 
         return maxSum;
+    }
+
+    // 26. Remove Duplicates from Sorted Array
+    public static int removeDuplicates(int[] nums) {
+
+        if(nums.length == 0) return 0;
+
+        int addIndex = 1; // index that unique nums will be inserted at
+
+        for (int i = 0; i < nums.length - 1; i++) {
+            if(nums[i] < nums[i + 1]) {
+                // if current num less than next num, then next num is not a duplicate or not the same as current
+                nums[addIndex] = nums[i + 1];
+                addIndex++;
+            }
+
+            // so if current & next num are same, addIndex won't increase bt i would increase
+        }
+
+        return addIndex;
     }
 }

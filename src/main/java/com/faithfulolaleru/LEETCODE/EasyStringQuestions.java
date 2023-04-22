@@ -1,9 +1,6 @@
 package com.faithfulolaleru.LEETCODE;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 public class EasyStringQuestions {
 
@@ -151,5 +148,30 @@ public class EasyStringQuestions {
         // if stack is not empty that means we have unused brackets.
 
         return stack.isEmpty();
+    }
+
+    // 383. Ransom Note
+    public boolean canConstruct(String ransomNote, String magazine) {
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < magazine.length(); i++) {
+            char current = magazine.charAt(i);
+            map.put(current, map.getOrDefault(current, 0) + 1);
+        }
+
+        for (int i = 0; i < ransomNote.length(); i++) {
+            char current = ransomNote.charAt(i);
+
+            if(!map.containsKey(current)) return false;
+
+            if(map.get(current) > 1) { // occurs more than once
+                map.put(current, map.get(current) - 1);
+            } else {  // occurs once, so remove instead of setting frequency to 0
+                map.remove(current);
+            }
+
+        }
+
+        return true;
     }
 }
