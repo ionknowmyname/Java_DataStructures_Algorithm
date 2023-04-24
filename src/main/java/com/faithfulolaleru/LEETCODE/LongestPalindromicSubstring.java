@@ -4,7 +4,7 @@ import java.nio.charset.StandardCharsets;
 
 public class LongestPalindromicSubstring {
 
-    // 5. Longest Palindromic Substring
+    // 5. Longest Palindromic Substring/Subsequence
 
     public static void main(String[] args) {
 
