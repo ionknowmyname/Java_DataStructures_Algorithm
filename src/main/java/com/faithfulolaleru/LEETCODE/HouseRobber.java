@@ -4,7 +4,7 @@ public class HouseRobber {
 
 
     public static void main(String[] args) {
-        int[] houses = new int[] { 6, 7, 1, 30, 8, 2, 4 };
+        int[] houses = { 6, 7, 1, 30, 8, 2, 4 };  // new int[]
         System.out.println(rob(houses));  // should be 41
         System.out.println(rob2(houses));  // should be 41
     }
