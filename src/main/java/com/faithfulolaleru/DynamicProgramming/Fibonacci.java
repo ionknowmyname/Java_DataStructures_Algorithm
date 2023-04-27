@@ -66,7 +66,7 @@ public class Fibonacci {
         if(n == 2) return 1;
 
         if(!memo.containsKey(n)) {
-            memo.put(n, fibonacciDP2(n -1, memo) + fibonacciDP2(n -2, memo));
+            memo.put(n, fibonacciDP2(n - 1, memo) + fibonacciDP2(n - 2, memo));
         }
 
         return memo.get(n);
