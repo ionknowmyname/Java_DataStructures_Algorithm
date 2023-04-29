@@ -99,4 +99,21 @@ public class EasyArrayQuestions {
 
         return addIndex;
     }
+
+    // 169. Majority Element
+    public int majorityElement(int[] nums) {
+        Map<Integer, Integer> count = new HashMap<>();
+
+        int maxCount = 0, maxCountInt = 0;
+        for (int i = 0; i < nums.length; i++) {
+            count.put(nums[i], count.getOrDefault(nums[i], 0) + 1);
+
+            if(count.get(nums[i]) > maxCount) {
+                maxCount = count.get(nums[i]);
+                maxCountInt = nums[i];
+            }
+        }
+
+        return maxCountInt;
+    }
 }
