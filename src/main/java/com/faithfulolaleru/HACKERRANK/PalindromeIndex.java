@@ -2,6 +2,10 @@ package com.faithfulolaleru.HACKERRANK;
 
 public class PalindromeIndex {
 
+
+    public static void main(String[] args) {
+        System.out.println(isPalindrome("never odd or even", 0, 16));
+    }
     public static int palindromeIndex(String s) {
 
         if (s == null || s.length() < 2) return -1;

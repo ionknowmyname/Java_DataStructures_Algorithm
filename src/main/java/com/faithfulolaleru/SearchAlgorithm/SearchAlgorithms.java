@@ -4,6 +4,9 @@ import java.util.Arrays;
 
 public class SearchAlgorithms {
 
+
+    String name = "sassd";
+
     public static void main(String[] args) {
         int[] arr = {1, 3, 2, 10, 23, 11};
         SearchAlgorithms.linearSearch(arr, 10);
