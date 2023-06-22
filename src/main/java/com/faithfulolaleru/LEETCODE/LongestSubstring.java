@@ -82,6 +82,10 @@ public class LongestSubstring {
             if (!set.contains(word.charAt(rightPointer))) {
                 set.add(word.charAt(rightPointer++));
                 maxLength = Math.max(maxLength, set.size());
+
+                // if you want to return the maxSubstring itself
+                // maxLength = Math.max(maxLength, rightPointer - leftPointer);
+                // maxString = word.substring(leftPointer, rightPointer);
             } else {
                 set.remove(word.charAt(leftPointer++));
             }
@@ -99,7 +103,7 @@ public class LongestSubstring {
                 } else {
                     set.remove(word.charAt(leftPointer));
                     leftPointer++;
-                    rightPointer++;
+                    rightPointer++;   // comment out and it should pass all tests
                 }
             }
 

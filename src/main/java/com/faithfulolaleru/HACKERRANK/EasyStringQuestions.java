@@ -1,8 +1,6 @@
 package com.faithfulolaleru.HACKERRANK;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class EasyStringQuestions {
 
@@ -15,7 +13,11 @@ public class EasyStringQuestions {
         // System.out.println(gradingStudents(List.of(73, 67, 38, 33)));  // 75, 67, 40, 33
 
         // System.out.println(pangrams("We promptly judged antique ivory buckles for the next prize"));
-        System.out.println(pangrams("qmExzBIJmdELxyOFWv LOCmefk TwPhargKSPEqSxzveiun"));   // pangram
+        // System.out.println(pangrams("qmExzBIJmdELxyOFWv LOCmefk TwPhargKSPEqSxzveiun"));   // pangram
+
+        // System.out.println(superReducedString("aaabccddd"));
+
+        System.out.println(marsExploration("SOSSPSSQSSOR"));
 
     }
 
@@ -300,4 +302,108 @@ public class EasyStringQuestions {
 
         return "pangram";
     }
+
+    public static String superReducedString(String s) {
+
+        char[] charArr = s.toCharArray();
+        // char[] toReturn = new char[s.length()];
+        List<Character> toReturn = new ArrayList<>();
+
+        int index = 1, startIndex = 0;
+
+        // you can use a list and just push instead of toReturn array, that way you don't have to track location of
+        // where you adding what
+
+
+        // for (int i = 1; i < s.length(); i++) { }
+
+        while(index < s.length()) {    // aaabccddd
+            char curr = charArr[index];
+            char prev = charArr[index - 1];
+
+            if(curr == prev) {
+                // remove both from final string
+                if(index < s.length() - 1) {
+                    char charToAdd = charArr[index + 1];
+                    toReturn.add(charToAdd);
+                    index++;   //
+                } // else break;
+
+            } else {
+                // keep current
+                if(index == 1) {  // just starting off, add both
+                    toReturn.add(prev);
+                    toReturn.add(curr);
+                    index++;
+                } else {
+                    if(toReturn.get(toReturn.size() - 1) == curr) {  // compare curr with the last value in toReturn
+                        // add next char
+                        char nextChar = charArr[index + 1];
+                        toReturn.add(nextChar);
+                        index++;
+                    } else {
+                        toReturn.add(curr);
+                        index++;
+                    }
+                }
+            }
+        }
+
+        String returnString = toReturn.toString();
+
+        if(returnString == "") return "Empty String";
+        else return returnString;
+
+
+
+
+
+        // SECOND SOLUTION, NOT WORKING
+
+        /*char[] charArr = s.toCharArray();
+
+        // convert from char[] to Character[]
+        Character[] characterArray = new Character[charArr.length];
+        for (int i = 0; i < charArr.length; i++) {
+            characterArray[i] = charArr[i];
+        }
+
+        Set<Character> charSet = new HashSet<>(Arrays.asList(characterArray));
+        StringBuilder sb = new StringBuilder();
+
+        for(Character ch : charSet) {
+            sb.append(ch.toString());
+        }
+
+        String toReturn = sb.toString();
+
+        if(toReturn == "") return "Empty String";
+        else return toReturn;*/
+    }
+
+    public static int marsExploration(String s) {
+        // Write your code here
+
+        int messageSentFreq = s.length() / 3;
+
+        // split S into 3, 3 "SOS"
+
+        char[] sCharArr = s.toCharArray();
+        // String[] sArr = s.split("^[A-Z]\\d{3}$");  // split by 3,3
+        String[] sArr = s.split("(?<=\\G.{3})");  // split by 3,3
+        String correct = "SOS";
+        int counter = 0;
+
+        for (int i = 0; i < messageSentFreq; i++) {
+            for (int j = 0; j < 3; j++) {   // "SOS"
+                String currStr = sArr[i];
+
+                if(currStr.charAt(j) == correct.charAt(j)) continue;
+                else counter++;
+            }
+        }
+
+        return counter;
+    }
+
 }
