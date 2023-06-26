@@ -17,6 +17,7 @@ public class CoinChange {
     // my solution
     // greedy algorithm
     // timed out
+    // 322. Coin Change
     public static int coinChange(int[] coins, int amount) {
         Arrays.sort(coins);
         int biggestCoin; // = coins[coins.length - 1];
