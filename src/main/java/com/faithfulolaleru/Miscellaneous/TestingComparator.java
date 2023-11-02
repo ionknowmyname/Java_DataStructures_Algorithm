@@ -48,4 +48,42 @@ public class TestingComparator implements Comparator<TestingComparator> {
 
         return input;
     }
+
+
+
+    /*
+
+    // when you are to compare with two things,  e.g sort player descending by score, if two players with the same
+    // score, then sort ascending by name;
+
+    // keep in mind default compareTo between a & b is ascending
+
+    class Checker implements Comparator<Player> {
+        // complete this method
+        public int compare(Player a, Player b) {
+            int comparing = Integer.compare(a.score, b.score);   // ascending
+            if(comparing != 0)
+                return comparing * -1;   // makes it descending
+            return a.name.compareTo(b.name);
+        }
+    }
+
+    */
+
+
+
+    /*
+
+    // MY SOLUTION
+
+    public int compare(Player a, Player b) {
+        Integer first = Integer.valueOf(b.score).compareTo(Integer.valueOf(a.score));
+
+        if(first == 0) {  // same score
+            return a.name.compareTo(b.name); // return sorted by name ascending
+        }
+
+        return first;
+    }
+    */
 }

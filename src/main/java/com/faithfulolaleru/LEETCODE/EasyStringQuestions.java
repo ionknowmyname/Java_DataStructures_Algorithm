@@ -150,6 +150,66 @@ public class EasyStringQuestions {
         return stack.isEmpty();
     }
 
+    // 678. Valid Parenthesis String
+    public boolean checkValidString(String s) {
+        Stack<Integer> stack = new Stack<>();   // Character
+        Stack<Integer> starStack = new Stack<>();
+
+        // first impl. failed some tests
+        /* for(char ch: s.toCharArray()) {
+            switch (ch) {
+                case '*':
+                    starStack.push(ch);
+                    break;
+                case '(':
+                    stack.push(ch);
+                    break;
+                case ')':
+                    if (!stack.isEmpty()) {  //   && stack.peek() == '('
+                        stack.pop();
+                    } else if (!starStack.isEmpty()) {
+                        starStack.pop();
+                    } else {
+                        return false;
+                    }
+                    break;
+            }
+        } */
+
+        // now pop the index into the stack not the actual chars
+        for (int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) == '(') stack.push(i);
+            else if(s.charAt(i) == '*') starStack.push(i);
+            else {
+                if(!stack.empty()) stack.pop();
+                else if(!starStack.empty()) starStack.pop();
+                else return false;
+            }
+        }
+
+        // top for-loop guarantee ')' is properly matched i.e '('or '*' popped out for every ')';
+        // now check for leftover '(' in stack
+
+
+        /*  while (!stack.isEmpty() && !starStack.isEmpty()) {
+            if (stack.peek() > starStack.peek()) {
+                // if ( comes after *, there's no way it'll be symmetric & cancel out
+                // it can only cancel out if * comes after ( so the * can be transformed to )
+                return false;
+            }
+            // else they cancel out each other
+            stack.pop();
+            starStack.pop();
+        } */
+
+        while (!stack.isEmpty() && !starStack.isEmpty() && starStack.peek() > stack.peek()) {
+            stack.pop();
+            starStack.pop();
+        }
+
+        return stack.isEmpty();
+    }
+
     // 383. Ransom Note
     public boolean canConstruct(String ransomNote, String magazine) {
         Map<Character, Integer> map = new HashMap<>();
