@@ -406,4 +406,45 @@ public class EasyStringQuestions {
         return counter;
     }
 
+    // balanced brackets
+    public static String isBalanced(String s) {
+
+        Stack<Character> stack = new Stack<>();
+
+        for(char ch: s.toCharArray())
+        {
+            switch (ch)
+            {
+                case '(':
+                case '{':
+                case '[':
+                    stack.push(ch);
+                    break;
+                case ')':
+                    if(stack.isEmpty() || stack.pop() != '(') {
+                        // if the stack is empty then it means string has no open bracket.
+                        return "NO";
+                    }
+                    break;
+                case '}':
+                    if(stack.isEmpty() || stack.pop() != '{') {
+                        return "NO";
+                    }
+                    break;
+                case ']':
+                    if(stack.isEmpty() || stack.pop() != '[') {
+                        return "NO";
+                    }
+                    break;
+            }
+        }
+
+        // return true only if the stack is empty.
+        // if stack is not empty that means we have unused brackets.
+
+        return stack.isEmpty() ? "YES" : "NO";
+
+    }
+
+
 }

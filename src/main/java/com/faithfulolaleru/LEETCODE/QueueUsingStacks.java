@@ -17,11 +17,12 @@ public class QueueUsingStacks {
     *
     * */
 
-    Stack<Integer> input = new Stack<>();
-    Stack<Integer> output = new Stack<>();
+    Stack<Integer> input;
+    Stack<Integer> output;
 
     public QueueUsingStacks() {
-
+        input = new Stack<>();
+        output = new Stack<>();
     }
 
     public void push(int x) {
