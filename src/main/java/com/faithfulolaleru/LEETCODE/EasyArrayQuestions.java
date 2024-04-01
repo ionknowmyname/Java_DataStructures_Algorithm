@@ -116,4 +116,23 @@ public class EasyArrayQuestions {
 
         return maxCountInt;
     }
+
+    // 27. Remove Element
+    // my solution, worked on first try
+    public int removeElement(int[] nums, int val) {
+
+        if(nums.length == 0) return 0;
+
+        int trackerIndex = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            if(nums[i] != val) {
+                nums[trackerIndex] = nums[i];
+                trackerIndex++;
+            }
+        }
+
+
+        return trackerIndex;
+    }
 }
