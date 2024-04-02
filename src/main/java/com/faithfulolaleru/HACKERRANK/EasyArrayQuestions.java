@@ -104,25 +104,100 @@ public class EasyArrayQuestions {
     public static void minimumBribes3(List<Integer> q) {
 
         int count = 0;
-        boolean chaotic=false;
+        boolean chaotic = false;
 
-        for(int i = 0; i < q.size(); i++){
+        for (int i = 0; i < q.size(); i++) {
             if (q.get(i) - (i + 1) > 2) {
                 // q.get(i) should = (i + 1), if difference > 2, means a number jumped more than 2 places to take that position
                 chaotic = true;
                 break;
             }
+
+            // basically start at the number before i and stop before i
             for (int j = Math.max(0, q.get(i) - 2); j < i; j++) {
+                // j pointer would be before i pointer, at each j position up to i, if
+                // j is greater than i, we keep increasing our count, that coz that's
+                // another position the number at index j jumped
                 if (q.get(j) > q.get(i)) {
                     count++;
                 }
             }
         }
 
-        if(chaotic) {
+        if (chaotic) {
             System.out.println("Too chaotic");
         } else {
             System.out.println(count);
         }
+    }
+
+    // the hurdle race
+    // passed once on first try; my code
+    public static int hurdleRace(int k, List<Integer> height) {
+        if (height.size() < 1) return 0;
+
+        int doseCounter =  0;
+
+        for (int i = 0; i < height.size(); i++) {
+            if (height.get(i) > k) {
+                int tempDoseCounter = height.get(i) - k;
+                if (doseCounter < tempDoseCounter) doseCounter = tempDoseCounter;
+            }
+        }
+
+        return doseCounter;
+    }
+
+    public static int hurdleRace2(int k, List<Integer> height) {
+        int requiredDoses = 0;
+        int maxHeight = Integer.MIN_VALUE;
+
+        for (int i = 0; i < height.size(); i++) {
+            maxHeight = Math.max(height.get(i), maxHeight);
+        }
+
+        if (maxHeight >= k) {
+            requiredDoses = maxHeight - k;
+        }
+
+        return requiredDoses;
+    }
+
+    public static int hurdleRace3(int k, List<Integer> height) {
+        int maxHeight = height.stream().max(Comparator.naturalOrder()).orElse(0);
+
+        return k >= maxHeight ? 0 : maxHeight - k;
+    }
+
+    //  diagonal difference
+    public static int diagonalDifference(List<List<Integer>> arr) {
+        int firstDiagonalSum = 0; int secondDiagonalSum = 0;
+
+        for (int i = 0; i < arr.size(); i++) {
+            firstDiagonalSum += arr.get(i).get(i);
+            secondDiagonalSum += arr.get(i).get(arr.size() - 1 - i);
+        }
+
+        return Math.abs(firstDiagonalSum - secondDiagonalSum);
+    }
+
+    // plus minus
+    public static void plusMinus(List<Integer> arr) {
+        float sumPlus = 0;
+        float sumMinus = 0;
+        float sumZero = 0;
+
+        for (int i = 0; i < arr.size(); i++) {
+            if(arr.get(i) > 0) sumPlus++;
+            if(arr.get(i) < 0) sumMinus++;
+            if(arr.get(i) == 0) sumZero++;
+        }
+
+        System.out.println(String.format("%.6f", sumPlus / arr.size()));
+        System.out.println(String.format("%.6f", sumMinus / arr.size()));
+        System.out.println(String.format("%.6f", sumZero / arr.size()));
+
+
+
     }
 }

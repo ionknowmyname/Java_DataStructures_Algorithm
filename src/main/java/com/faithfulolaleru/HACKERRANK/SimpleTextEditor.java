@@ -57,7 +57,7 @@ public class SimpleTextEditor {
                         throw new Exception("Invalid input!");
                 }
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

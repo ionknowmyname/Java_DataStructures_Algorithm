@@ -49,14 +49,15 @@ public class MergeSortedLinkedList {
     // Recursive solution
     public static ListNode mergeLists2(ListNode head1, ListNode head2) {
 
-        if(head1 == null) {
+        if (head1 == null) {
             return head2;
         }
-        if(head2 == null) {
+
+        if (head2 == null) {
             return head1;
         }
 
-        if(head1.data < head2.data) {
+        if (head1.data < head2.data) {
             head1.next = mergeLists2(head1.next, head2); // move to new head before returning node
             return head1;
         } else {

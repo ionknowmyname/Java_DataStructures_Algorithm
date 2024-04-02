@@ -2,8 +2,6 @@ package com.faithfulolaleru.HACKERRANK;
 
 import com.faithfulolaleru.base.BinarySearchNode;
 
-import java.util.Queue;
-
 public class BinarySearchTree {
 
     static BinarySearchNode root;
@@ -61,6 +59,7 @@ public class BinarySearchTree {
         if (value1 == root.value || value2 == root.value) {
             return root;
         }
+
         if ((value1 < root.value && value2 > root.value)
                 || (value2 < root.value && value1 > root.value)) {
 
@@ -76,7 +75,7 @@ public class BinarySearchTree {
     }
 
 
-    // fails some tests on leetcode, works fine on hackerrank?
+    // fails some tests on leetcode, works fine on hackerrank tho
     public BinarySearchNode findLowestCommonAncestor2(BinarySearchNode root, BinarySearchNode node1, BinarySearchNode node2) {
 
         if (root == null) {
@@ -85,11 +84,13 @@ public class BinarySearchTree {
         if (root == node1 || root == node2) {
             return root;
         }
+
         if ((root.value > node1.value && root.value < node2.value)
                 || (root.value < node1.value && root.value > node2.value)) {
 
             return root;
         }
+
         BinarySearchNode left = findLowestCommonAncestor2(root.left, node1, node2);
         return left == null ? findLowestCommonAncestor2(root.right, node1, node2) : left;
     }

@@ -40,7 +40,7 @@ public class BinarySearchTree {
 
 
     public BinarySearchNode insertNode(BinarySearchNode currentNode, int value){
-        if(currentNode == null){
+        if(currentNode == null) {
             BinarySearchNode newNode = new BinarySearchNode(value);
             System.out.println("Successfully inserted new node with value -> " + value);
             return newNode;
@@ -60,7 +60,7 @@ public class BinarySearchTree {
     public void preOrderTraversal(BinarySearchNode node){
         // root -> left -> right
 
-        if(node == null){  // we have reached the leaf node, so stop recursive call
+        if(node == null) {  // we have reached the leaf node, so stop recursive call
             return;
         }
 

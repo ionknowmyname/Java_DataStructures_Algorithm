@@ -290,7 +290,7 @@ public class EasyStringQuestions {
                 index2 = 0;   // to start comparing from beginning of S again
                 continue;
             } else {
-                index2++;  // go to next char String s
+                index2++;  // go to next char in String s
             }
 
             if(index2 > s.length() - 1) {
@@ -411,10 +411,8 @@ public class EasyStringQuestions {
 
         Stack<Character> stack = new Stack<>();
 
-        for(char ch: s.toCharArray())
-        {
-            switch (ch)
-            {
+        for (char ch: s.toCharArray()) {
+            switch (ch) {
                 case '(':
                 case '{':
                 case '[':

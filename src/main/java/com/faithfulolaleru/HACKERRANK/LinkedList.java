@@ -32,7 +32,7 @@ public class LinkedList {
 
 
     // WORKING
-    public ListNode addValueAtEnd(ListNode head, Integer value){
+    public ListNode addValueAtEnd(ListNode head, Integer value) {  // insertNodeAtTail
         ListNode newNode = new ListNode(value);
         ListNode current = head;
 
@@ -40,7 +40,7 @@ public class LinkedList {
             return newNode;
         }
 
-        while(current.next != null){
+        while(current.next != null) {
             current = current.next;
         }
 
@@ -200,8 +200,8 @@ public class LinkedList {
             listLength2--;
         }
 
-        while(head1 != null){
-            if (head1 == head2){
+        while(head1 != null) {
+            if (head1 == head2) {
                 return head1.data;
             }
             head1 = head1.next;
