@@ -14,7 +14,7 @@ public class ByteWorks {
         int counter = 0;
         List<Integer> toReturn = new ArrayList<>();
 
-        if(d == 0) return a;
+        if (d == 0) return a;
 
         for (int i = d; i < a.size(); i++) {
             toReturn.add(a.get(i));

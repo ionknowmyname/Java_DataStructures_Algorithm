@@ -444,5 +444,44 @@ public class EasyStringQuestions {
 
     }
 
+    // https://www.hackerrank.com/challenges/making-anagrams/problem
+    public static int makingAnagrams(String s1, String s2) {
+        /*
+        *   You can use hashmap as normal, load all characters in s1 and frequencies, then run through
+        *   s2 and unload, the amount to delete to make anagrams would be the sum of all frequencies of
+        *   keys still left in the hashmap
+        *
+        *   the below solution is a new approach, testing it out
+        *
+        * */
+
+        int minDeletions = 0;
+        int[] s1Frequencies = new int[26];
+        int[] s2Frequencies = new int[26];
+
+        for (int i = 0; i < s1.length(); i++) {
+            char currentChar = s1.charAt(i);
+            int charToInt = (int) currentChar;  // ascii for characters
+            int position = charToInt - (int)'a';  // a should be 97
+            // c would be 99, so the position of c would be 2 in s1Frequencies
+            s1Frequencies[position]++;
+        }
+
+        for (int i = 0; i < s2.length(); i++) {
+            char currentChar = s2.charAt(i);
+            int charToInt = (int) currentChar;  // ascii for characters
+            int position = charToInt - (int)'a';  // a should be 97
+            // c would be 99, so the position of c would be 2 in s1Frequencies
+            s2Frequencies[position]++;
+        }
+
+        for (int i = 0; i < 26; i++) {  // 26 letters of the alphabet
+            int difference = Math.abs(s1Frequencies[i] - s2Frequencies[i]);
+            minDeletions += difference;
+        }
+
+        return minDeletions;
+    }
+
 
 }

@@ -11,11 +11,11 @@ public class MoniePoint {
         System.out.println(balancedArray(List.of(1, 2, 3, 3)));
     }
 
-    static int balancedArray(List<Integer> arr)
-    {
+    static int balancedArray(List<Integer> arr) {
 //        List<Integer> list
 //                = Arrays.stream(arr).boxed().collect(
 //                Collectors.toList());
+
         for (int i = 1; i <= arr.size(); i++) {
             int leftSum = arr.subList(0, i)
                     .stream()
@@ -27,9 +27,9 @@ public class MoniePoint {
                     .mapToInt(x -> x)
                     .sum();
 
-            if (leftSum == rightSum)
-                return i;
+            if (leftSum == rightSum) return i;
         }
+
         return -1;
     }
 }
