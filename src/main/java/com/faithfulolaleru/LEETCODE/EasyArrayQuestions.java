@@ -135,4 +135,8 @@ public class EasyArrayQuestions {
 
         return trackerIndex;
     }
+
+    public boolean hasDuplicate(int[] nums) {
+        Set neSet = new HashSet();
+    }
 }

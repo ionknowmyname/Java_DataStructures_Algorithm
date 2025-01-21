@@ -1,5 +1,9 @@
 package com.faithfulolaleru.INTERVIEWS;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -173,6 +177,36 @@ public class MusalaSoft {
         count = Math.abs(map.getOrDefault('(', 0) - map.getOrDefault(')', 0));
 
         return count;
+    }
+
+    public static String consumeDoorEvents(String events) {
+        StringBuilder S = new StringBuilder();
+        int counter = 0;
+        boolean isPaused = false;
+        for (char ch : events.toCharArray()) {
+            if (ch == '.') {
+                if (counter > 0 && !isPaused) counter++;
+
+                S.append(counter);
+            } else if (ch == 'P') {
+                if (isPaused && counter >= 0) {
+                    counter++;
+                    isPaused = false;
+                } else if (isPaused && counter == 0) {
+                    counter++;
+                    isPaused = false;
+                }
+
+                S.append(counter);
+            } else if (ch == 'O') {
+                // this for 'O'
+                if (counter > 0 && !isPaused) counter--;
+                S.append(counter);
+            }
+
+        }
+
+        return S.toString();
     }
 
 
