@@ -1,4 +1,4 @@
-package com.faithfulolaleru.ForUoPeople;
+package com.faithfulolaleru.ForUoPeople.CS1102;
 
 import java.util.Arrays;
 import java.util.List;
