@@ -136,7 +136,36 @@ public class EasyArrayQuestions {
         return trackerIndex;
     }
 
-    public boolean hasDuplicate(int[] nums) {
-        Set neSet = new HashSet();
+    public boolean containsDuplicate(int[] nums) {
+        /*Set newSet = new HashSet();
+        newSet.addAll(Arrays.asList(nums));
+
+        return newSet.size() != nums.length;*/
+
+        return Arrays.stream(nums).distinct().count() < nums.length;
+    }
+
+    public boolean containsDuplicate2(int[] nums) {
+        Set<Integer> newSet = new HashSet<>();
+
+        for (int num : nums) {
+            if (newSet.contains(num)) return true;
+        }
+
+        return false;
+    }
+
+    public boolean containsDuplicate3(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            if (!map.containsKey(nums[i])) {
+                map.put(nums[i], 1);
+            } else {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

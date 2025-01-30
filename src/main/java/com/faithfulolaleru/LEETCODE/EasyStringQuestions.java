@@ -96,6 +96,25 @@ public class EasyStringQuestions {
         return false;
     }
 
+    // working perfectly too
+    public boolean isAnagram3(String s, String t) {
+        Map<Character, Integer> track  = new HashMap<>();
+
+        for(char item : s.toCharArray()) {
+            track.put(item, track.getOrDefault(item, 0) + 1);
+        }
+
+        for(char item : t.toCharArray()) {
+            if (track.containsKey(item) && track.get(item) > 0) track.put(item, track.get(item) - 1);
+            else return false;
+        }
+
+        Collection<Integer> vlist = track.values();
+        int final2 = vlist.stream().reduce(0, Integer::sum);
+
+        return final2 == 0;
+    }
+
     // 125. Valid Palindrome
     public boolean isPalindrome(String s) {
         String toLowerAndAlphaNum = s.toLowerCase()
