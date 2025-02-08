@@ -27,14 +27,16 @@ public class GroupAnagrams {
 
         Map<String, List<String>> hashMap = new HashMap<>();
 
-        for(int i = 0; i < strs.length; i++){
+        for (int i = 0; i < strs.length; i++) {
             char[] chArr = strs[i].toCharArray();
             Arrays.sort(chArr);
             String keyStr = String.valueOf(chArr);
 
-            if (!hashMap.containsKey(keyStr)) {
-                hashMap.put(keyStr, new ArrayList<>());
-            }
+//            if (!hashMap.containsKey(keyStr)) {
+//                hashMap.put(keyStr, new ArrayList<>());
+//            }
+
+            hashMap.putIfAbsent(keyStr, new ArrayList<>());
 
             hashMap.get(keyStr).add(strs[i]);
         }
