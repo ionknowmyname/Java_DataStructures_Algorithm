@@ -27,8 +27,6 @@ public class CanSum {
         System.out.println(canSumDP(300, new int[]{7, 14}, new HashMap<>()));
 
         System.out.println(canSum(300, new int[]{7, 14}));
-
-
     }
 
 
@@ -49,18 +47,16 @@ public class CanSum {
     }
 
     // memoization  // Dynamic Programming
-    // java solution not working, check js
     public static boolean canSumDP(int target, int[] nums, Map<Integer, Boolean> map) {
-
-        if(map.containsKey(target)) return map.get(target);
-
         if(target == 0) return true;
         if(target < 0) return false;
+
+        if(map.containsKey(target)) return map.get(target);
 
         for(int num : nums) {
             int remainder = target - num;
 
-            if(canSum(remainder, nums) == true) {
+            if(canSumDP(remainder, nums, map) == true) {
                 map.put(target, true);  // save the result in map/memo before returning
                 return true;
             }
