@@ -44,7 +44,7 @@ public class Fibonacci {
     public static int fibonacciDynamicProgramming(int n, int[] memo) {
         if(n < 0) return 0;
         if(n == 0 || n == 1) {
-            memo[n] = 1;
+            memo[n] = n;  // 1
 
             return memo[n];
         }

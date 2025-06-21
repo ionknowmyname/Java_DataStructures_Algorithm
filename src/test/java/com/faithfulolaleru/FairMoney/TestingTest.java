@@ -1,4 +1,4 @@
-package com.faithfulolaleru.fairmoney;
+package com.faithfulolaleru.FairMoney;
 
 //import static org.junit.jupiter.api.Assertions.*;
 
