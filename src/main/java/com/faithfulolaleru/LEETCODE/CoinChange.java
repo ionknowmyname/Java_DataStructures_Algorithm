@@ -1,8 +1,6 @@
 package com.faithfulolaleru.LEETCODE;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class CoinChange {
 
@@ -150,4 +148,40 @@ public class CoinChange {
         // if dp[amount] > amount, it means dp[amount] was never updated throughout the whole iteration, meaning the
         // amount could not be made up from any combination of coins in coins array
     }
+
+    // DP Recursive
+    public static int coinChange6(int[] coins, int amount, Map<Integer, Integer> memo) {
+        if (amount == 0) return 0;
+
+        // another base case for if (amount - coin) is a -ve value, it means we can't get that amount using that coin,
+        // so return -1
+        if (amount < 0) return -1;
+
+        if (memo.containsKey(amount)) return memo.get(amount);
+
+        int minCoins = -1;  // the problem states if its not possible to make the amount with the content of coins array, return  -1
+        for (int coin : coins) {
+            int subAmount = amount - coin;
+            int subCoins = coinChange6(coins, subAmount, memo);  // subCoins = no. of coins to make the subAmount
+
+            if (subCoins != -1) {
+                // that means it was possible to get the subAmount using the coins
+                int numCoins = subCoins + 1;
+                // numCoins is the no. of coins to make the original amount; + 1 to account for the 1 coin in (amount - coin)
+
+                // now update to minimum
+                if (numCoins < minCoins || minCoins == -1) minCoins = numCoins;
+            }
+
+
+        }
+
+        memo.put(amount, minCoins);
+        return minCoins;
+    }
+
+    public static int coinChange6(int[] coins, int amount) {
+        return coinChange6(coins, amount, new HashMap<>());
+    }
+
 }
