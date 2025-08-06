@@ -105,7 +105,7 @@ public class CoinChange {
         Arrays.fill(dp, amount + 1);
         dp[0] = 0;
 
-        for(int coin : coins) {
+        for (int coin : coins) {
             for (int i = coin; i <= amount; i++) {
                 // start from the coin, don't do amounts smaller than the coin for each loop, coz the
                 // coin would be too big to be subtracted from the smaller amount
