@@ -1,13 +1,32 @@
 package com.faithfulolaleru.SortAlgorithm;
 
+import java.util.Random;
+
 public class MergeSortAlgorithm {
 
 
     public static void main(String[] args) {
-        int[] array = {5,7,4,16, 13, 12, 3};
+        int[] sizes = {10, 50, 100, 200};
+        Random rand = new Random();
 
-        MergeSortAlgorithm.mergeSort(array, 0, array.length-1);   // can call the methods directly without instantiating object of class coz of static
-        MergeSortAlgorithm.printArray(array);
+        // int[] array = {5,7,4,16, 13, 12, 3};
+
+        for (int size : sizes) {
+            int[] arr1 = new int[size];
+            for (int i = 0; i < size; i++) {
+                arr1[i] = rand.nextInt(10000);
+            }
+
+            long start1 = System.nanoTime();
+            mergeSort(arr1, 0, arr1.length - 1);
+            long mergeTime = System.nanoTime() - start1;
+
+            System.out.printf("%-10d %-20d%n", size, mergeTime);
+        }
+
+
+        // MergeSortAlgorithm.mergeSort(array, 0, array.length-1);   // can call the methods directly without instantiating object of class coz of static
+        // MergeSortAlgorithm.printArray(array);
     }
 
 

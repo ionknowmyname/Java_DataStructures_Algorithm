@@ -1,16 +1,34 @@
 package com.faithfulolaleru.SortAlgorithm;
 
+import java.util.Random;
+
 public class QuickSortAlgorithm {
 
 
     public static void main(String[] args) {
-        int[] array = {5,7,4,16, 13, 12, 3};
-        System.out.print("Before Sort --> ");
-        QuickSortAlgorithm.printArray(array);
-        System.out.println();
-        QuickSortAlgorithm.quickSort(array, 0, array.length-1);
-        System.out.print("After Sort --> ");
-        QuickSortAlgorithm.printArray(array);
+        // int[] array = {5,7,4,16, 13, 12, 3};
+//        System.out.print("Before Sort --> ");
+//        QuickSortAlgorithm.printArray(array);
+//        System.out.println();
+//        QuickSortAlgorithm.quickSort(array, 0, array.length-1);
+//        System.out.print("After Sort --> ");
+//        QuickSortAlgorithm.printArray(array);
+
+        int[] sizes = {10, 50, 100, 200};
+        Random rand = new Random();
+
+        for (int size : sizes) {
+            int[] arr1 = new int[size];
+            for (int i = 0; i < size; i++) {
+                arr1[i] = rand.nextInt(10000);
+            }
+
+            long start1 = System.nanoTime();
+            quickSort(arr1, 0, arr1.length - 1);
+            long quickTime = System.nanoTime() - start1;
+
+            System.out.printf("%-10d %-20d%n", size, quickTime);
+        }
     }
 
 
